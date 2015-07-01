@@ -6,7 +6,7 @@ var routes = require('./routes');
 var app = express();
 
 app.use(cors());
-routes(app);
+routes.initialize(app);
 
 var server = app.listen(process.env.PORT || 3000, function () {
   var host = server.address();

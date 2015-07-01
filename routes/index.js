@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var HttpStatus = require('http-status');
 
-module.exports = function (app) {
+exports.initialize = function (app) {
   fs
     .readdirSync(__dirname)
     .filter(function (file) {
