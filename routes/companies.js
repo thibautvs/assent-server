@@ -1,16 +1,32 @@
 'use strict';
 
-module.exports = function (app, HttpStatus) {
-  var companyList = [
-    {id:1, name:'Coca-Cola'},
-    {id:2, name:'Deloitte'}
-  ];
+module.exports = function (app, models, HttpStatus) {
+  var Company = models.Company;
 
   app.get('/companies', function (req, res, next) {
-    res.json(companyList);
+    // var companyList = [
+    //   {id:1, name:'Coca-Cola'},
+    //   {id:2, name:'Deloitte'}
+    // ];
+    // res.json(companyList);
+    Company
+      .all()
+      .then(function (data) {
+        res.send(data);
+      })
+      .catch(function (err) {
+        next(err);
+      });
   });
 
   app.get('/companies/:id', function (req, res, next) {
-    res.json(companyList[0]);
+    Company
+      .find({ where: { id: req.params.id } })
+      .then(function (data) {
+        res.send(data === null ? HttpStatus.NOT_FOUND : data);
+      })
+      .catch(function (err) {
+        next(err);
+      });
   });
 };
