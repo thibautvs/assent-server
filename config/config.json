@@ -20,7 +20,10 @@
       "username": "dbadmin",
       "password": "C0mplexPwd",
       "host": "rds-assent.cext2v4uawv7.eu-west-1.rds.amazonaws.com",
-      "port": 5432
+      "port": 5432,
+      "pool": {
+        "min": 1
+      }
     }
   }
 }
