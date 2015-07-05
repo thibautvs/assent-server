@@ -4,11 +4,6 @@ module.exports = function (app, models, HttpStatus) {
   var Company = models.Company;
 
   app.get('/companies', function (req, res, next) {
-    // var companyList = [
-    //   {id:1, name:'Coca-Cola'},
-    //   {id:2, name:'Deloitte'}
-    // ];
-    // res.json(companyList);
     Company
       .all()
       .then(function (data) {

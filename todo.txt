@@ -1,0 +1,1 @@
+- use dev settings, not prod ones (config.json)
