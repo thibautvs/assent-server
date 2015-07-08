@@ -9,6 +9,11 @@ var app = express();
 app.use(cors());
 routes.initialize(app, models);
 
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
+
 models.sequelize.sync().then(function () {
   var server = app.listen(process.env.PORT || 3000, function () {
     var host = server.address();
