@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (app, HttpStatus) {
+module.exports = function (app, models, HttpStatus) {
   var Student = models.Student;
 
   app.get('/students', function (req, res, next) {
