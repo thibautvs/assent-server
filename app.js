@@ -1,11 +1,13 @@
 'use strict';
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var cors = require('cors');
 var routes = require('./routes');
 var models = require('./models');
 var app = express();
 
+app.use(bodyParser.json());
 app.use(cors());
 routes.initialize(app, models);
 
