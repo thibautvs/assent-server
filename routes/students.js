@@ -13,4 +13,15 @@ module.exports = function (app, models, HttpStatus) {
         next(err);
       });
   });
+
+  app.post('/students', function (req, res, next) {
+    Student
+      .findOrCreate({where: {email: req.params.email}})
+      .spread(function (student, created) {
+        res.send(created ? HttpStatus.CREATED : HttpStatus.CONFLICT);
+      })
+      .fail(function (err) {
+        next(err);
+      });
+  });
 };
