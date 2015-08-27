@@ -1,1 +1,5 @@
 - use dev settings, not prod ones (config.json)
+- use separate .json files for config (dev.json, prod.json, test.json), use config module (see JS manual pg 49)
+- logger (morgan, ...)
+- consider using Amazon Glacier to reduce S3 costs
+- consider using Container Service (docker) : http://aws.amazon.com/containers/?sc_channel=em&sc_campaign=cross_sell&sc_publisher=aws&sc_medium=em_143341850&sc_content=cross_sell_ecs&sc_detail=en_cross_sell_ec2snssqs-ecs&sc_geo=global&sc_segment=em_1294597252&ref_=pe_1876150_143341850_10

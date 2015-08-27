@@ -8,7 +8,7 @@ CREATE TABLE "Companies"
   name text NOT NULL,
   "createdAt" timestamp with time zone,
   "updatedAt" timestamp with time zone,
-  CONSTRAINT "primary" PRIMARY KEY (id)
+  CONSTRAINT "companies-primary" PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE

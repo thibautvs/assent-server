@@ -6,7 +6,7 @@ module.exports = function (app, models, HttpStatus) {
   app.get('/students', function (req, res, next) {
     Student
       .all()
-      .then(function (data) { res.send(data); })
+      .then(function (data) { res.send({students: data}); })
       .catch(function (err) { next(err); });
   });
 
@@ -17,7 +17,7 @@ module.exports = function (app, models, HttpStatus) {
         if (data === null) {
           Student
             .create({email: req.body.email})
-            .then(function () { res.sendStatus(HttpStatus.CREATED); })
+            .then(function (data) { res.status(HttpStatus.CREATED).send({id: data.id}); })
             .catch(function (err) { next(err); });
         } else {
           res.sendStatus(HttpStatus.CONFLICT);

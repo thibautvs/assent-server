@@ -6,22 +6,16 @@ module.exports = function (app, models, HttpStatus) {
   app.get('/companies', function (req, res, next) {
     Company
       .all()
-      .then(function (data) {
-        res.send(data);
-      })
-      .catch(function (err) {
-        next(err);
-      });
+      .then(function (data) { res.send({companies: data}); })
+      .catch(function (err) { next(err); });
   });
 
   app.get('/companies/:id', function (req, res, next) {
     Company
-      .find({ where: { id: req.params.id } })
+      .find({where: {id: req.params.id }})
       .then(function (data) {
-        res.send(data === null ? HttpStatus.NOT_FOUND : data);
+        res.send(data === null ? HttpStatus.NOT_FOUND : {company: data});
       })
-      .catch(function (err) {
-        next(err);
-      });
+      .catch(function (err) { next(err); });
   });
 };
