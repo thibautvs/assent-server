@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (app, models, HttpStatus) => {
-  let Company = models.Company;
+  const Company = models.Company;
 
   app.get('/companies', (req, res, next) => {
     Company

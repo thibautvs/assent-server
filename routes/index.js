@@ -1,8 +1,8 @@
 'use strict';
 
-let fs = require('fs');
-let path = require('path');
-let HttpStatus = require('http-status');
+const fs = require('fs');
+const path = require('path');
+const HttpStatus = require('http-status');
 
 exports.initialize = (app, models) => {
   fs
