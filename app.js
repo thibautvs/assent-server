@@ -1,12 +1,13 @@
 'use strict';
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var routes = require('./routes');
-var models = require('./models');
-var app = express();
+let express = require('express');
+let bodyParser = require('body-parser');
+let cors = require('cors');
+let routes = require('./routes');
+let models = require('./models');
+let app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 routes.initialize(app, models);
@@ -17,8 +18,8 @@ app.use(function (err, req, res, next) {
 });
 
 models.sequelize.sync().then(function () {
-  var server = app.listen(process.env.PORT || 3000, function () {
-    var host = server.address();
+  let server = app.listen(process.env.PORT || 3000, function () {
+    let host = server.address();
     console.log('API running at http://%s:%s', host.address, host.port);
   });
 });

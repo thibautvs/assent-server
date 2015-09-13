@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (app, models, HttpStatus) {
-  var Student = models.Student;
+  let Student = models.Student;
 
   app.get('/students', function (req, res, next) {
     Student

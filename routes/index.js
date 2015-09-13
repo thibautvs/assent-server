@@ -1,8 +1,8 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var HttpStatus = require('http-status');
+let fs = require('fs');
+let path = require('path');
+let HttpStatus = require('http-status');
 
 exports.initialize = function (app, models) {
   fs

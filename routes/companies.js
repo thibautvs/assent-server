@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (app, models, HttpStatus) {
-  var Company = models.Company;
+  let Company = models.Company;
 
   app.get('/companies', function (req, res, next) {
     Company

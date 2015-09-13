@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (sequelize, DataTypes) {
-  var Student = sequelize.define('Student', {
+  let Student = sequelize.define('Student', {
     email: DataTypes.TEXT
   }, {
     tableName: 'Students'
