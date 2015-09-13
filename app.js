@@ -12,13 +12,13 @@ app.use(bodyParser.json());
 app.use(cors());
 routes.initialize(app, models);
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Internal Server Error');
 });
 
-models.sequelize.sync().then(function () {
-  let server = app.listen(process.env.PORT || 3000, function () {
+models.sequelize.sync().then(() => {
+  let server = app.listen(process.env.PORT || 3000, () => {
     let host = server.address();
     console.log('API running at http://%s:%s', host.address, host.port);
   });
