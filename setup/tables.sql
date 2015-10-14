@@ -7,8 +7,8 @@ CREATE TABLE faculty
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT faculty_pkey PRIMARY KEY (id)
 );
 
@@ -23,8 +23,8 @@ CREATE TABLE university
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT university_pkey PRIMARY KEY (id)
 );
 
@@ -39,8 +39,8 @@ CREATE TABLE degree
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT degree_pkey PRIMARY KEY (id)
 );
 
@@ -55,8 +55,8 @@ CREATE TABLE skill
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT skill_pkey PRIMARY KEY (id)
 );
 
@@ -71,8 +71,8 @@ CREATE TABLE hobby
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT hobby_pkey PRIMARY KEY (id)
 );
 
@@ -87,8 +87,8 @@ CREATE TABLE course
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT course_pkey PRIMARY KEY (id)
 );
 
@@ -103,8 +103,8 @@ CREATE TABLE company
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT company_pkey PRIMARY KEY (id)
 );
 
@@ -120,8 +120,8 @@ CREATE TABLE language
   id           serial                   NOT NULL,
   name         text                     NOT NULL,
   abbreviation text                     NOT NULL,
-  created_at   timestamp with time zone NOT NULL,
-  updated_at   timestamp with time zone NOT NULL,
+  created_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT language_pkey PRIMARY KEY (id)
 );
 
@@ -136,8 +136,8 @@ CREATE TABLE experience_type
 (
   id           serial                   NOT NULL,
   name         text                     NOT NULL,
-  created_at   timestamp with time zone NOT NULL,
-  updated_at   timestamp with time zone NOT NULL,
+  created_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT experience_type_pkey PRIMARY KEY (id)
 );
 
@@ -152,10 +152,11 @@ CREATE TABLE media_type
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  extension  text                     NOT NULL,
+  extension  text,
   icon       bytea,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  is_youtube boolean,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT media_type_pkey PRIMARY KEY (id)
 );
 
@@ -177,8 +178,8 @@ CREATE TABLE student_profile
   degree_year   integer,
   photo         bytea,
   about_me      text,
-  created_at    timestamp with time zone NOT NULL,
-  updated_at    timestamp with time zone NOT NULL,
+  created_at    timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at    timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_pkey               PRIMARY KEY (id),
   CONSTRAINT student_profile_faculty_id_fkey    FOREIGN KEY (faculty_id)    REFERENCES faculty (id),
   CONSTRAINT student_profile_university_id_fkey FOREIGN KEY (university_id) REFERENCES university (id),
@@ -196,8 +197,8 @@ CREATE TABLE student_profile_skill
 (
   student_profile_id integer                  NOT NULL,
   skill_id           integer                  NOT NULL,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_skill_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_skill_skill_id_fkey           FOREIGN KEY (skill_id)           REFERENCES skill (id)
 );
@@ -213,8 +214,9 @@ CREATE TABLE student_profile_hobby
 (
   student_profile_id integer                  NOT NULL,
   hobby_id           integer                  NOT NULL,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  description        text                     NOT NULL,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_hobby_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_hobby_hobby_id           FOREIGN KEY (hobby_id)           REFERENCES hobby (id)
 );
@@ -232,11 +234,11 @@ CREATE TABLE student_profile_grade
   course_id          integer                  NOT NULL,
   grade_actual       decimal(3,1)             NOT NULL,
   grade_max          integer                  NOT NULL,
-  degree_year        integer                  NOT NULL,
   degree_id          integer                  NOT NULL,
+  degree_year        integer                  NOT NULL,
   month              integer                  NOT NULL,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_grade_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_grade_course_id          FOREIGN KEY (course_id)          REFERENCES course (id),
   CONSTRAINT student_profile_grade_degree_id          FOREIGN KEY (degree_id)          REFERENCES degree (id)
@@ -255,9 +257,10 @@ CREATE TABLE media
   student_profile_id integer                  NOT NULL,
   media_type_id      integer                  NOT NULL,
   title              text                     NOT NULL,
-  data               bytea                    NOT NULL,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  data               bytea,
+  url                text,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT media_pkey               PRIMARY KEY (id),
   CONSTRAINT media_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT media_media_type_id      FOREIGN KEY (media_type_id)      REFERENCES media_type (id)
@@ -280,8 +283,8 @@ CREATE TABLE education
   is_erasmus         boolean,
   start_date         date                     NOT NULL,
   end_date           date,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT education_pkey               PRIMARY KEY (id),
   CONSTRAINT education_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT education_degree_id          FOREIGN KEY (degree_id)          REFERENCES degree (id),
@@ -305,8 +308,8 @@ CREATE TABLE experience
   start_date         date                     NOT NULL,
   end_date           date,
   description        text                     NOT NULL,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT experience_pkey               PRIMARY KEY (id),
   CONSTRAINT experience_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT experience_experience_type_id FOREIGN KEY (experience_type_id) REFERENCES experience_type (id),
@@ -326,12 +329,12 @@ CREATE TABLE language_skill
   student_profile_id integer                  NOT NULL,
   language_id        integer                  NOT NULL,
   is_mother_tongue   boolean                  NOT NULL,
-  listening_level    integer                  NOT NULL,
-  speaking_level     integer                  NOT NULL,
-  reading_level      integer                  NOT NULL,
-  writing_level      integer                  NOT NULL,
-  created_at         timestamp with time zone NOT NULL,
-  updated_at         timestamp with time zone NOT NULL,
+  listening_level    integer,
+  speaking_level     integer,
+  reading_level      integer,
+  writing_level      integer,
+  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT language_skill_pkey               PRIMARY KEY (id),
   CONSTRAINT language_skill_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT language_skill_language_id        FOREIGN KEY (language_id)        REFERENCES language (id),
@@ -356,8 +359,8 @@ CREATE TABLE user_account
   last_name          text             NOT NULL,
   password           text             NOT NULL,
   student_profile_id integer          NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT user_account_pk                 PRIMARY KEY (id),
   CONSTRAINT user_account_student_profile_id FOREIGN KEY (student_profile_id) REFERENCES student_profile (id)
 );
