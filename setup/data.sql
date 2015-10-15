@@ -94,12 +94,12 @@ INSERT INTO student_profile_hobby (student_profile_id, hobby_id, description, po
   VALUES (1, 2, 'Captain of the team. Learned how to motivate people so that they can surpass themselves. We won the silver cup for the 2013 national tournament.', 2);
 
 /*
- * student_profile_grade
+ * grade
  */
-INSERT INTO student_profile_grade (student_profile_id, course_id, grade_actual, grade_max, degree_id, degree_year, month, position)
+INSERT INTO grade (student_profile_id, course_id, grade_actual, grade_max, degree_id, degree_year, month, position)
   VALUES (1, 1, 19, 20, 1, 1, 1, 1);
 
-INSERT INTO student_profile_grade (student_profile_id, course_id, grade_actual, grade_max, degree_id, degree_year, month, position)
+INSERT INTO grade (student_profile_id, course_id, grade_actual, grade_max, degree_id, degree_year, month, position)
   VALUES (1, 2, 18, 20, 1, 1, 6, 2);
 
 /*
@@ -131,13 +131,13 @@ INSERT INTO experience (student_profile_id, experience_type_id, company_id, star
   VALUES (1, 2, 3, '2013-01-01', '2013-04-01', 'Management of a team of 4 students for an event planning company.');
 
 /*
- * language_skill
+ * student_profile_language
  */
-INSERT INTO language_skill (student_profile_id, language_id, is_mother_tongue, position)
+INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, position)
   VALUES (1, 1, TRUE, 1);
 
-INSERT INTO language_skill (student_profile_id, language_id, is_mother_tongue, listening_level, speaking_level, reading_level, writing_level, position)
+INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, listening_level, speaking_level, reading_level, writing_level, position)
   VALUES (1, 2, FALSE, 1, 2, 3, 4, 2);
 
-INSERT INTO language_skill (student_profile_id, language_id, is_mother_tongue, listening_level, speaking_level, reading_level, writing_level, position)
+INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, listening_level, speaking_level, reading_level, writing_level, position)
   VALUES (1, 3, FALSE, 1, 2, 3, 4, 3);

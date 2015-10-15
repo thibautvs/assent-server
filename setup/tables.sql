@@ -200,6 +200,7 @@ CREATE TABLE student_profile_skill
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT student_profile_skill_pkey                    PRIMARY KEY (student_profile_id, skill_id),
   CONSTRAINT student_profile_skill_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_skill_skill_id_fkey           FOREIGN KEY (skill_id)           REFERENCES skill (id)
 );
@@ -219,6 +220,7 @@ CREATE TABLE student_profile_hobby
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT student_profile_hobby_pkey                    PRIMARY KEY (student_profile_id, hobby_id),
   CONSTRAINT student_profile_hobby_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_hobby_hobby_id_fkey           FOREIGN KEY (hobby_id)           REFERENCES hobby (id)
 );
@@ -226,28 +228,29 @@ CREATE TABLE student_profile_hobby
 ALTER TABLE student_profile_hobby OWNER TO dbadmin;
 
 /*
- * student_profile_grade
+ * grade
  */
-DROP TABLE IF EXISTS student_profile_grade CASCADE;
+DROP TABLE IF EXISTS grade CASCADE;
 
-CREATE TABLE student_profile_grade
+CREATE TABLE grade
 (
   student_profile_id integer                  NOT NULL,
   course_id          integer                  NOT NULL,
-  grade_actual       decimal(3,1)             NOT NULL,
-  grade_max          integer                  NOT NULL,
   degree_id          integer                  NOT NULL,
   degree_year        integer                  NOT NULL,
   month              integer                  NOT NULL,
+  grade_actual       decimal(3,1)             NOT NULL,
+  grade_max          integer                  NOT NULL,
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT student_profile_grade_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT student_profile_grade_course_id_fkey          FOREIGN KEY (course_id)          REFERENCES course (id),
-  CONSTRAINT student_profile_grade_degree_id_fkey          FOREIGN KEY (degree_id)          REFERENCES degree (id)
+  CONSTRAINT grade_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
+  CONSTRAINT grade_course_id_fkey          FOREIGN KEY (course_id)          REFERENCES course (id),
+  CONSTRAINT grade_degree_id_fkey          FOREIGN KEY (degree_id)          REFERENCES degree (id),
+  CONSTRAINT grade_unique                  UNIQUE (student_profile_id, course_id, degree_id, degree_year, month)
 );
 
-ALTER TABLE student_profile_grade OWNER TO dbadmin;
+ALTER TABLE grade OWNER TO dbadmin;
 
 /*
  * media
@@ -323,13 +326,12 @@ CREATE TABLE experience
 ALTER TABLE experience OWNER TO dbadmin;
 
 /*
- * language_skill
+ * student_profile_language
  */
-DROP TABLE IF EXISTS language_skill CASCADE;
+DROP TABLE IF EXISTS student_profile_language CASCADE;
 
-CREATE TABLE language_skill
+CREATE TABLE student_profile_language
 (
-  id                 serial                   NOT NULL,
   student_profile_id integer                  NOT NULL,
   language_id        integer                  NOT NULL,
   is_mother_tongue   boolean                  NOT NULL,
@@ -340,16 +342,16 @@ CREATE TABLE language_skill
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT language_skill_pkey                    PRIMARY KEY (id),
-  CONSTRAINT language_skill_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT language_skill_language_id_fkey        FOREIGN KEY (language_id)        REFERENCES language (id),
-  CONSTRAINT listening_level_range_check            CHECK (listening_level >= 1 AND listening_level <= 4),
-  CONSTRAINT speaking_level_range_check             CHECK (speaking_level >= 1 AND speaking_level <= 4),
-  CONSTRAINT reading_level_range_check              CHECK (reading_level >= 1 AND reading_level <= 4),
-  CONSTRAINT writing_level_range_check              CHECK (writing_level >= 1 AND writing_level <= 4)
+  CONSTRAINT student_profile_language_pkey                                   PRIMARY KEY (student_profile_id, language_id),
+  CONSTRAINT student_profile_language_student_profile_id_fkey                FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
+  CONSTRAINT student_profile_language_language_id_fkey                       FOREIGN KEY (language_id)        REFERENCES language (id),
+  CONSTRAINT student_profile_language_listening_level_range_check            CHECK (listening_level >= 1 AND listening_level <= 4),
+  CONSTRAINT student_profile_language_speaking_level_range_check             CHECK (speaking_level >= 1 AND speaking_level <= 4),
+  CONSTRAINT student_profile_language_reading_level_range_check              CHECK (reading_level >= 1 AND reading_level <= 4),
+  CONSTRAINT student_profile_language_writing_level_range_check              CHECK (writing_level >= 1 AND writing_level <= 4)
 );
 
-ALTER TABLE language_skill OWNER TO dbadmin;
+ALTER TABLE student_profile_language OWNER TO dbadmin;
 
 /*
  * user_account
