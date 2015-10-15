@@ -361,15 +361,15 @@ CREATE TABLE student_profile_language
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT student_profile_language_pkey                                   PRIMARY KEY (student_profile_id, language_id),
-  CONSTRAINT student_profile_language_student_profile_id_fkey                FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT student_profile_language_language_id_fkey                       FOREIGN KEY (language_id)        REFERENCES language (id),
-  CONSTRAINT student_profile_language_listening_level_range_check            CHECK (listening_level >= 1 AND listening_level <= 4),
-  CONSTRAINT student_profile_language_speaking_level_range_check             CHECK (speaking_level >= 1 AND speaking_level <= 4),
-  CONSTRAINT student_profile_language_reading_level_range_check              CHECK (reading_level >= 1 AND reading_level <= 4),
-  CONSTRAINT student_profile_language_writing_level_range_check              CHECK (writing_level >= 1 AND writing_level <= 4),
-  CONSTRAINT student_profile_language_unique                                 UNIQUE (student_profile_id, language_id),
-  CONSTRAINT student_profile_language_position_unique                        UNIQUE (student_profile_id, position)
+  CONSTRAINT student_profile_language_pkey                        PRIMARY KEY (student_profile_id, language_id),
+  CONSTRAINT student_profile_language_student_profile_id_fkey     FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
+  CONSTRAINT student_profile_language_language_id_fkey            FOREIGN KEY (language_id)        REFERENCES language (id),
+  CONSTRAINT student_profile_language_listening_level_range_check CHECK (listening_level >= 1 AND listening_level <= 4),
+  CONSTRAINT student_profile_language_speaking_level_range_check  CHECK (speaking_level >= 1 AND speaking_level <= 4),
+  CONSTRAINT student_profile_language_reading_level_range_check   CHECK (reading_level >= 1 AND reading_level <= 4),
+  CONSTRAINT student_profile_language_writing_level_range_check   CHECK (writing_level >= 1 AND writing_level <= 4),
+  CONSTRAINT student_profile_language_unique                      UNIQUE (student_profile_id, language_id),
+  CONSTRAINT student_profile_language_position_unique             UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE student_profile_language OWNER TO dbadmin;
