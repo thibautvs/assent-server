@@ -9,7 +9,8 @@ CREATE TABLE faculty
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT faculty_pkey PRIMARY KEY (id)
+  CONSTRAINT faculty_pkey        PRIMARY KEY (id),
+  CONSTRAINT faculty_unique_name UNIQUE (name)
 );
 
 ALTER TABLE faculty OWNER TO dbadmin;
@@ -25,7 +26,8 @@ CREATE TABLE university
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT university_pkey PRIMARY KEY (id)
+  CONSTRAINT university_pkey        PRIMARY KEY (id),
+  CONSTRAINT university_unique_name UNIQUE (name)
 );
 
 ALTER TABLE university OWNER TO dbadmin;
@@ -41,7 +43,8 @@ CREATE TABLE degree
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT degree_pkey PRIMARY KEY (id)
+  CONSTRAINT degree_pkey        PRIMARY KEY (id),
+  CONSTRAINT degree_unique_name UNIQUE (name)
 );
 
 ALTER TABLE degree OWNER TO dbadmin;
@@ -57,7 +60,8 @@ CREATE TABLE skill
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT skill_pkey PRIMARY KEY (id)
+  CONSTRAINT skill_pkey        PRIMARY KEY (id),
+  CONSTRAINT skill_unique_name UNIQUE (name)
 );
 
 ALTER TABLE skill OWNER TO dbadmin;
@@ -73,7 +77,8 @@ CREATE TABLE hobby
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT hobby_pkey PRIMARY KEY (id)
+  CONSTRAINT hobby_pkey        PRIMARY KEY (id),
+  CONSTRAINT hobby_unique_name UNIQUE (name)
 );
 
 ALTER TABLE hobby OWNER TO dbadmin;
@@ -89,7 +94,8 @@ CREATE TABLE course
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT course_pkey PRIMARY KEY (id)
+  CONSTRAINT course_pkey        PRIMARY KEY (id),
+  CONSTRAINT course_unique_name UNIQUE (name)
 );
 
 ALTER TABLE course OWNER TO dbadmin;
@@ -105,7 +111,8 @@ CREATE TABLE company
   name       text                     NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT company_pkey PRIMARY KEY (id)
+  CONSTRAINT company_pkey        PRIMARY KEY (id),
+  CONSTRAINT company_unique_name UNIQUE (name)
 );
 
 ALTER TABLE company OWNER TO dbadmin;
@@ -119,10 +126,12 @@ CREATE TABLE language
 (
   id           serial                   NOT NULL,
   name         text                     NOT NULL,
-  abbreviation text                     NOT NULL,
+  code         text                     NOT NULL,
   created_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT language_pkey PRIMARY KEY (id)
+  CONSTRAINT language_pkey        PRIMARY KEY (id),
+  CONSTRAINT language_unique_name UNIQUE (name),
+  CONSTRAINT language_unique_code UNIQUE (code)
 );
 
 ALTER TABLE language OWNER TO dbadmin;
@@ -138,7 +147,8 @@ CREATE TABLE experience_type
   name         text                     NOT NULL,
   created_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT experience_type_pkey PRIMARY KEY (id)
+  CONSTRAINT experience_type_pkey        PRIMARY KEY (id),
+  CONSTRAINT experience_type_unique_name UNIQUE (name)
 );
 
 ALTER TABLE experience_type OWNER TO dbadmin;
@@ -157,7 +167,9 @@ CREATE TABLE media_type
   is_youtube boolean,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT media_type_pkey PRIMARY KEY (id)
+  CONSTRAINT media_type_pkey             PRIMARY KEY (id),
+  CONSTRAINT media_type_unique_name      UNIQUE (name),
+  CONSTRAINT media_type_unique_extension UNIQUE (extension)
 );
 
 ALTER TABLE media_type OWNER TO dbadmin;
@@ -202,7 +214,9 @@ CREATE TABLE student_profile_skill
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_skill_pkey                    PRIMARY KEY (student_profile_id, skill_id),
   CONSTRAINT student_profile_skill_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT student_profile_skill_skill_id_fkey           FOREIGN KEY (skill_id)           REFERENCES skill (id)
+  CONSTRAINT student_profile_skill_skill_id_fkey           FOREIGN KEY (skill_id)           REFERENCES skill (id),
+  CONSTRAINT student_profile_skill_unique                  UNIQUE (student_profile_id, skill_id),
+  CONSTRAINT student_profile_skill_position_unique         UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE student_profile_skill OWNER TO dbadmin;
@@ -222,7 +236,9 @@ CREATE TABLE student_profile_hobby
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_hobby_pkey                    PRIMARY KEY (student_profile_id, hobby_id),
   CONSTRAINT student_profile_hobby_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT student_profile_hobby_hobby_id_fkey           FOREIGN KEY (hobby_id)           REFERENCES hobby (id)
+  CONSTRAINT student_profile_hobby_hobby_id_fkey           FOREIGN KEY (hobby_id)           REFERENCES hobby (id),
+  CONSTRAINT student_profile_hobby_unique                  UNIQUE (student_profile_id, hobby_id),
+  CONSTRAINT student_profile_hobby_position_unique         UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE student_profile_hobby OWNER TO dbadmin;
@@ -247,7 +263,8 @@ CREATE TABLE grade
   CONSTRAINT grade_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT grade_course_id_fkey          FOREIGN KEY (course_id)          REFERENCES course (id),
   CONSTRAINT grade_degree_id_fkey          FOREIGN KEY (degree_id)          REFERENCES degree (id),
-  CONSTRAINT grade_unique                  UNIQUE (student_profile_id, course_id, degree_id, degree_year, month)
+  CONSTRAINT grade_unique                  UNIQUE (student_profile_id, course_id, degree_id, degree_year, month),
+  CONSTRAINT grade_position_unique         UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE grade OWNER TO dbadmin;
@@ -268,9 +285,11 @@ CREATE TABLE media
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT media_pkey               PRIMARY KEY (id),
+  CONSTRAINT media_pkey                    PRIMARY KEY (id),
   CONSTRAINT media_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT media_media_type_id_fkey      FOREIGN KEY (media_type_id)      REFERENCES media_type (id)
+  CONSTRAINT media_media_type_id_fkey      FOREIGN KEY (media_type_id)      REFERENCES media_type (id),
+  CONSTRAINT media_unique                  UNIQUE (student_profile_id, title, media_type_id),
+  CONSTRAINT media_position_unique         UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE media OWNER TO dbadmin;
@@ -292,7 +311,7 @@ CREATE TABLE education
   end_date           date,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT education_pkey               PRIMARY KEY (id),
+  CONSTRAINT education_pkey                    PRIMARY KEY (id),
   CONSTRAINT education_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT education_degree_id_fkey          FOREIGN KEY (degree_id)          REFERENCES degree (id),
   CONSTRAINT education_faculty_id_fkey         FOREIGN KEY (faculty_id)         REFERENCES faculty (id),
@@ -317,7 +336,7 @@ CREATE TABLE experience
   description        text                     NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT experience_pkey               PRIMARY KEY (id),
+  CONSTRAINT experience_pkey                    PRIMARY KEY (id),
   CONSTRAINT experience_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT experience_experience_type_id_fkey FOREIGN KEY (experience_type_id) REFERENCES experience_type (id),
   CONSTRAINT experience_company_id_fkey         FOREIGN KEY (company_id)         REFERENCES company (id)
@@ -348,7 +367,9 @@ CREATE TABLE student_profile_language
   CONSTRAINT student_profile_language_listening_level_range_check            CHECK (listening_level >= 1 AND listening_level <= 4),
   CONSTRAINT student_profile_language_speaking_level_range_check             CHECK (speaking_level >= 1 AND speaking_level <= 4),
   CONSTRAINT student_profile_language_reading_level_range_check              CHECK (reading_level >= 1 AND reading_level <= 4),
-  CONSTRAINT student_profile_language_writing_level_range_check              CHECK (writing_level >= 1 AND writing_level <= 4)
+  CONSTRAINT student_profile_language_writing_level_range_check              CHECK (writing_level >= 1 AND writing_level <= 4),
+  CONSTRAINT student_profile_language_unique                                 UNIQUE (student_profile_id, language_id),
+  CONSTRAINT student_profile_language_position_unique                        UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE student_profile_language OWNER TO dbadmin;

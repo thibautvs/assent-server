@@ -60,9 +60,9 @@ INSERT INTO company (name) VALUES ('Dolce Events');
 /*
  * language
  */
-INSERT INTO language (name, abbreviation) VALUES ('Dutch', 'nl');
-INSERT INTO language (name, abbreviation) VALUES ('French', 'fr');
-INSERT INTO language (name, abbreviation) VALUES ('English', 'en');
+INSERT INTO language (name, code) VALUES ('Dutch', 'nl');
+INSERT INTO language (name, code) VALUES ('French', 'fr');
+INSERT INTO language (name, code) VALUES ('English', 'en');
 
 /*
  * student_profile
