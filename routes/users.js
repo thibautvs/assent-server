@@ -1,18 +1,18 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
-const utils = require('../utils');
+const stringUtils = require('../utils/string');
 const workFactor = 10;
 
-module.exports = (app, models, HttpStatus) => {
+module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   const User = models.User;
 
   app.post('/users', (req, res, next) => {
     // TODO validate password strength
-    if (utils.nullOrEmpty(req.body.email)
-      || utils.nullOrEmpty(req.body.firstName)
-      || utils.nullOrEmpty(req.body.lastName)
-      || utils.nullOrEmpty(req.body.password)) {
+    if (stringUtils.nullOrEmpty(req.body.email)
+      || stringUtils.nullOrEmpty(req.body.firstName)
+      || stringUtils.nullOrEmpty(req.body.lastName)
+      || stringUtils.nullOrEmpty(req.body.password)) {
         res.status(HttpStatus.BAD_REQUEST).send({message: 'Missing mandatory fields'});
     } else {
       User

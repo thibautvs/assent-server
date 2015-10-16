@@ -126,7 +126,7 @@ CREATE TABLE language
 (
   id           serial                   NOT NULL,
   name         text                     NOT NULL,
-  code         text                     NOT NULL,
+  code         varchar(2)               NOT NULL,
   created_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT language_pkey        PRIMARY KEY (id),
@@ -162,7 +162,7 @@ CREATE TABLE media_type
 (
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
-  extension  text,
+  extension  varchar(4),
   icon       bytea,
   is_youtube boolean,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -382,11 +382,9 @@ DROP TABLE IF EXISTS user_account CASCADE;
 CREATE TABLE user_account
 (
   id                 serial           NOT NULL,
-  email              text             NOT NULL,
-  first_name         text             NOT NULL,
-  last_name          text             NOT NULL,
-  password           text             NOT NULL,
   student_profile_id integer          NOT NULL,
+  email              text             NOT NULL,
+  password           text             NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT user_account_pk                      PRIMARY KEY (id),

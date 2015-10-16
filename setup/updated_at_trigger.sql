@@ -10,7 +10,7 @@ END;
 $$ language 'plpgsql';
 
 /*
- * Update triggers on all tables
+ * Create triggers on all tables
  */
 DO $$
 DECLARE

@@ -16,9 +16,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 });
 
-models.sequelize.sync().then(() => {
-  const server = app.listen(process.env.PORT || 3000, () => {
-    const host = server.address();
-    console.log('API running at http://%s:%s', host.address, host.port);
-  });
+const server = app.listen(process.env.PORT || 3000, () => {
+  const host = server.address();
+  console.log('API running at http://%s:%s', host.address, host.port);
 });
