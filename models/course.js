@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       field: 'name'
     }
   }, {
-    tableName: 'course'
+    tableName: 'course',
+    classMethods: {
+      associate: models => {
+        Course.hasOne(models.Grade);
+      }
+    }
   });
 
   return Course;

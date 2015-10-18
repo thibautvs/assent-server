@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
       field: 'code'
     }
   }, {
-    tableName: 'language'
+    tableName: 'language',
+    classMethods: {
+      associate: models => {
+        Language.hasOne(models.StudentProfileLanguage);
+      }
+    }
   });
 
   return Language;

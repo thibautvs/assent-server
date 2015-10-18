@@ -12,10 +12,10 @@ exports.findAll = (model, res, next) => {
     .catch(err => next(err));
 };
 
-exports.findWhere = (model, whereClause, req, res, next) => {
+exports.findWhere = (model, options, req, res, next) => {
   let jsonRoot = stringUtils.lowercaseFirstLetter(model.name);
   model
-    .find(whereClause)
+    .find(options)
     .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : buildJson(jsonRoot, data)))
     .catch(err => next(err));
 };

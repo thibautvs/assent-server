@@ -250,6 +250,7 @@ DROP TABLE IF EXISTS grade CASCADE;
 
 CREATE TABLE grade
 (
+  id                 serial                   NOT NULL,
   student_profile_id integer                  NOT NULL,
   course_id          integer                  NOT NULL,
   degree_id          integer                  NOT NULL,

@@ -29,6 +29,13 @@ module.exports = (sequelize, DataTypes) => {
         StudentProfile.belongsTo(models.Faculty);
         StudentProfile.belongsTo(models.University);
         StudentProfile.belongsTo(models.Degree);
+        StudentProfile.hasMany(models.StudentProfileSkill);
+        StudentProfile.hasMany(models.StudentProfileLanguage);
+        StudentProfile.hasMany(models.StudentProfileHobby);
+        StudentProfile.hasMany(models.Media);
+        StudentProfile.hasMany(models.Experience);
+        StudentProfile.hasMany(models.Education);
+        StudentProfile.hasMany(models.Grade);
       }
     }
   });

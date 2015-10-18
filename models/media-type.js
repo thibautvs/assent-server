@@ -19,7 +19,12 @@ module.exports = (sequelize, DataTypes) => {
       field: 'is_youtube'
     }
   }, {
-    tableName: 'media_type'
+    tableName: 'media_type',
+    classMethods: {
+      associate: models => {
+        MediaType.hasOne(models.Media);
+      }
+    }
   });
 
   return MediaType;
