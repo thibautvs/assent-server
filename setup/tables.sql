@@ -163,7 +163,6 @@ CREATE TABLE media_type
   id         serial                   NOT NULL,
   name       text                     NOT NULL,
   extension  varchar(4),
-  icon       bytea,
   is_youtube boolean,
   created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
