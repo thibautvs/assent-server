@@ -6,28 +6,35 @@ const HttpStatus = require('http-status');
 exports.findAll = (model, res, next) => {
   model
     .all()
-    .then(data => res.send(serializeJson(model, data)))
+    .then(data => res.send(buildJson(data)))
     .catch(err => next(err));
 };
 
 exports.findWhere = (model, options, req, res, next) => {
   model
     .find(options)
-    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : serializeJson(model, data)))
+    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : buildJson(data)))
     .catch(err => next(err));
 };
 
-function serializeJson(model, data) {
+function buildJson(data) {
   recurseAllProperties(data);
 
   return data;
 }
 
 function recurseAllProperties(data) {
-  let dataValues = data.dataValues;
-  _.forEach(Object.keys(dataValues), prop => {
-    recurse(dataValues, prop);
-  });
+  if (_.isArray(data)) {
+    _.forEach(data, item => {
+      recurseAllProperties(item);
+    });
+  } else {
+    let dataValues = data.dataValues;
+
+    _.forEach(Object.keys(dataValues), prop => {
+      recurse(dataValues, prop);
+    });
+  }
 }
 
 function recurse(data, prop) {
