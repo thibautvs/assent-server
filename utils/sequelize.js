@@ -18,14 +18,9 @@ exports.findWhere = (model, options, req, res, next) => {
 };
 
 function serializeJson(model, data) {
-  let json = {};
-  let modelName = model.options.name;
-  let rootModelName = _.camelCase(_.isArray(data) ? modelName.plural : modelName.singular);
-
   recurseAllProperties(data);
-  json[rootModelName] = data;
 
-  return json;
+  return data;
 }
 
 function recurseAllProperties(data) {
