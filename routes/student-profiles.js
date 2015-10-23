@@ -4,7 +4,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   const StudentProfile = models.StudentProfile;
 
   app.get('/studentProfiles/:id', (req, res, next) => {
-    var options = {
+    let options = {
       where: {id: req.params.id},
       include: [
         {model: models.Faculty},
@@ -44,7 +44,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
         ]}
       ]
     };
-    
+
     sequelizeUtils.findWhere(StudentProfile, options, req, res, next);
   });
 };
