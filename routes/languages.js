@@ -6,4 +6,8 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.get('/languages', (req, res, next) => {
     sequelizeUtils.findAll(Language, res, next);
   });
+
+  app.get('/languages/:id', (req, res, next) => {
+    sequelizeUtils.findById(Language, req, res, next);
+  });
 };

@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       field: 'title'
     },
-    data: {
+    content: {
       type: DataTypes.BLOB,
-      field: 'data'
+      field: 'content'
     },
     url: {
       type: DataTypes.TEXT,

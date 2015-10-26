@@ -11,10 +11,10 @@ exports.findAll = (model, res, next) => {
 };
 
 exports.findById = (model, req, res, next) => {
-  this.findWhere(model, {where:{id:req.params.id}}, req, res, next);
+  this.findWhere(model, {where:{id:req.params.id}}, res, next);
 };
 
-exports.findWhere = (model, options, req, res, next) => {
+exports.findWhere = (model, options, res, next) => {
   model
     .find(options)
     .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : buildJson(model, data)))
@@ -39,7 +39,6 @@ function recurseAllProperties(data) {
     });
   } else {
     let dataValues = data.dataValues;
-
     _.forEach(Object.keys(dataValues), prop => {
       recurse(dataValues, prop);
     });
@@ -53,23 +52,23 @@ function recurse(data, prop) {
   if (prop === 'created_at' || prop === 'updated_at') {
     delete data[prop];
   }
-  // Rename relation as camel case
+  // Rename property to camel case
   else if (prop !== _.camelCase(prop)) {
-    let renamedProp = _.camelCase(prop);
-    // Remove trailing 'Id'
-    if (_.endsWith(renamedProp, 'Id')) {
-      renamedProp = _.trimRight(renamedProp, 'Id')
-    }
-
-    data[renamedProp] = value;
     delete data[prop];
+    prop = _.camelCase(prop);
+
+    // Remove trailing 'Id'
+    if (_.endsWith(prop, 'Id')) {
+      prop = _.trimRight(prop, 'Id')
+    }
+    data[prop] = value;
   }
 
+  // Convert relationships lists to array of id's
   if (_.isArray(value)) {
+    data[prop] = [];
     _.forEach(value, item => {
-      recurseAllProperties(item);
+      data[prop].push(item.dataValues.id);
     });
-  } else if (_.isObject(value) && !_.isDate(value)) {
-    recurseAllProperties(value);
   }
 }

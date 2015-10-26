@@ -2,16 +2,6 @@
 
 module.exports = (sequelize, DataTypes) => {
   let StudentProfileLanguage = sequelize.define('StudentProfileLanguage', {
-    studentProfileId: {
-      type: DataTypes.INTEGER,
-      field: 'student_profile_id',
-      primaryKey: true
-    },
-    languageId: {
-      type: DataTypes.INTEGER,
-      field: 'language_id',
-      primaryKey: true
-    },
     isMotherTongue: {
       type: DataTypes.BOOLEAN,
       field: 'is_mother_tongue'

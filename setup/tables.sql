@@ -206,12 +206,13 @@ DROP TABLE IF EXISTS student_profile_skill CASCADE;
 
 CREATE TABLE student_profile_skill
 (
+  id                 serial                   NOT NULL,
   student_profile_id integer                  NOT NULL,
   skill_id           integer                  NOT NULL,
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT student_profile_skill_pkey                    PRIMARY KEY (student_profile_id, skill_id),
+  CONSTRAINT student_profile_skill_pkey                    PRIMARY KEY (id),
   CONSTRAINT student_profile_skill_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_skill_skill_id_fkey           FOREIGN KEY (skill_id)           REFERENCES skill (id),
   CONSTRAINT student_profile_skill_unique                  UNIQUE (student_profile_id, skill_id),
@@ -227,13 +228,14 @@ DROP TABLE IF EXISTS student_profile_hobby CASCADE;
 
 CREATE TABLE student_profile_hobby
 (
+  id                 serial                   NOT NULL,
   student_profile_id integer                  NOT NULL,
   hobby_id           integer                  NOT NULL,
   description        text                     NOT NULL,
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT student_profile_hobby_pkey                    PRIMARY KEY (student_profile_id, hobby_id),
+  CONSTRAINT student_profile_hobby_pkey                    PRIMARY KEY (id),
   CONSTRAINT student_profile_hobby_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_hobby_hobby_id_fkey           FOREIGN KEY (hobby_id)           REFERENCES hobby (id),
   CONSTRAINT student_profile_hobby_unique                  UNIQUE (student_profile_id, hobby_id),
@@ -260,6 +262,7 @@ CREATE TABLE grade
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT grade_pkey                    PRIMARY KEY (id),
   CONSTRAINT grade_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT grade_course_id_fkey          FOREIGN KEY (course_id)          REFERENCES course (id),
   CONSTRAINT grade_degree_id_fkey          FOREIGN KEY (degree_id)          REFERENCES degree (id),
@@ -280,7 +283,7 @@ CREATE TABLE media
   student_profile_id integer                  NOT NULL,
   media_type_id      integer                  NOT NULL,
   title              text                     NOT NULL,
-  data               bytea,
+  content            bytea,
   url                text,
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -351,6 +354,7 @@ DROP TABLE IF EXISTS student_profile_language CASCADE;
 
 CREATE TABLE student_profile_language
 (
+  id                 serial                   NOT NULL,
   student_profile_id integer                  NOT NULL,
   language_id        integer                  NOT NULL,
   is_mother_tongue   boolean                  NOT NULL,
@@ -361,7 +365,7 @@ CREATE TABLE student_profile_language
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT student_profile_language_pkey                        PRIMARY KEY (student_profile_id, language_id),
+  CONSTRAINT student_profile_language_pkey                        PRIMARY KEY (id),
   CONSTRAINT student_profile_language_student_profile_id_fkey     FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_language_language_id_fkey            FOREIGN KEY (language_id)        REFERENCES language (id),
   CONSTRAINT student_profile_language_listening_level_range_check CHECK (listening_level >= 1 AND listening_level <= 4),

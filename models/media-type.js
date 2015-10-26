@@ -10,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(4),
       field: 'extension'
     },
-    icon: {
-      type: DataTypes.BLOB,
-      field: 'icon'
-    },
     isYouTube: {
       type: DataTypes.BOOLEAN,
       field: 'is_youtube'
