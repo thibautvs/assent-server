@@ -6,4 +6,8 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.get('/degrees', (req, res, next) => {
     sequelizeUtils.findAll(Degree, res, next);
   });
+
+  app.get('/degrees/:id', (req, res, next) => {
+    sequelizeUtils.findById(Degree, req, res, next);
+  });
 };

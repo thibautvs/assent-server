@@ -6,21 +6,30 @@ const HttpStatus = require('http-status');
 exports.findAll = (model, res, next) => {
   model
     .all()
-    .then(data => res.send(buildJson(data)))
+    .then(data => res.send(buildJson(model, data)))
     .catch(err => next(err));
+};
+
+exports.findById = (model, req, res, next) => {
+  this.findWhere(model, {where:{id:req.params.id}}, req, res, next);
 };
 
 exports.findWhere = (model, options, req, res, next) => {
   model
     .find(options)
-    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : buildJson(data)))
+    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : buildJson(model, data)))
     .catch(err => next(err));
 };
 
-function buildJson(data) {
-  recurseAllProperties(data);
+function buildJson(model, data) {
+  let json = {};
+  let modelName = model.options.name;
+  let rootModelName = _.camelCase(_.isArray(data) ? modelName.plural : modelName.singular);
 
-  return data;
+  recurseAllProperties(data);
+  json[rootModelName] = data;
+
+  return json;
 }
 
 function recurseAllProperties(data) {
@@ -41,12 +50,18 @@ function recurse(data, prop) {
   let value = data[prop];
 
   // Remove technical fields
-  if (_.contains(prop, '_')) {
+  if (prop === 'created_at' || prop === 'updated_at') {
     delete data[prop];
   }
-  // Rename properties as camel case
+  // Rename relation as camel case
   else if (prop !== _.camelCase(prop)) {
-    data[_.camelCase(prop)] = value;
+    let renamedProp = _.camelCase(prop);
+    // Remove trailing 'Id'
+    if (_.endsWith(renamedProp, 'Id')) {
+      renamedProp = _.trimRight(renamedProp, 'Id')
+    }
+
+    data[renamedProp] = value;
     delete data[prop];
   }
 
