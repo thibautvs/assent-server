@@ -26,26 +26,26 @@ function buildJson(model, data) {
   let modelName = model.options.name;
   let rootModelName = _.camelCase(_.isArray(data) ? modelName.plural : modelName.singular);
 
-  recurseAllProperties(data);
+  processAllProperties(data);
   json[rootModelName] = data;
 
   return json;
 }
 
-function recurseAllProperties(data) {
+function processAllProperties(data) {
   if (_.isArray(data)) {
     _.forEach(data, item => {
-      recurseAllProperties(item);
+      processAllProperties(item);
     });
   } else {
     let dataValues = data.dataValues;
     _.forEach(Object.keys(dataValues), prop => {
-      recurse(dataValues, prop);
+      processProperty(dataValues, prop);
     });
   }
 }
 
-function recurse(data, prop) {
+function processProperty(data, prop) {
   let value = data[prop];
 
   // Remove technical fields

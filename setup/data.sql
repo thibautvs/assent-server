@@ -100,7 +100,7 @@ INSERT INTO grade (student_profile_id, course_id, grade_actual, grade_max, degre
   VALUES (1, 1, 19, 20, 1, 1, 1, 1);
 
 INSERT INTO grade (student_profile_id, course_id, grade_actual, grade_max, degree_id, degree_year, month, position)
-  VALUES (1, 2, 18, 20, 1, 1, 6, 2);
+  VALUES (1, 2, 18.5, 20, 1, 1, 6, 2);
 
 /*
  * media
