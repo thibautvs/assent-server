@@ -6,21 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       field: 'is_mother_tongue'
     },
-    listeningLevel: {
-      type: DataTypes.INTEGER,
-      field: 'listening_level'
-    },
-    speakingLevel: {
-      type: DataTypes.INTEGER,
-      field: 'speaking_level'
-    },
-    readingLevel: {
-      type: DataTypes.INTEGER,
-      field: 'reading_level'
-    },
-    writingLevel: {
-      type: DataTypes.INTEGER,
-      field: 'writing_level'
+    level: {
+      type: DataTypes.DECIMAL(2, 1),
+      field: 'level'
     },
     position: {
       type: DataTypes.INTEGER,

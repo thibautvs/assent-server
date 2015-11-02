@@ -1,4 +1,14 @@
 /*
+ * country
+ */
+INSERT INTO country (name) VALUES ('Belgium');
+
+/*
+ * city
+ */
+INSERT INTO city (name) VALUES ('Brussels');
+
+/*
  * faculty
  */
 INSERT INTO faculty (name) VALUES ('Business Administration');
@@ -32,13 +42,6 @@ INSERT INTO course (name) VALUES ('Marketing');
 INSERT INTO course (name) VALUES ('Management');
 
 /*
- * media_type
- */
-INSERT INTO media_type (name, extension) VALUES ('Pdf', 'pdf');
-INSERT INTO media_type (name, extension) VALUES ('Word', 'doc');
-INSERT INTO media_type (name, is_youtube) VALUES ('YouTube', TRUE);
-
-/*
  * degree
  */
 INSERT INTO degree (name) VALUES ('Master');
@@ -67,12 +70,14 @@ INSERT INTO language (name, code) VALUES ('English', 'en');
 /*
  * student_profile
  */
-INSERT INTO student_profile (first_name, last_name, faculty_id, university_id, degree_id, degree_year, about_me)
-  VALUES ('Jessica', 'Martens', 1, 1, 1, 1, 'Hi ! I’m Jessica, Business Administration student at KU Leuven. I’m very social and dynamic, love the contact with people and solving challenges.
+INSERT INTO student_profile (first_name, last_name, country_id, city_id, faculty_id, university_id, degree_id, degree_year, expected_graduation_year, video_url, about_me, aspirations, funny_fact, projects)
+  VALUES ('Jessica', 'Martens', 1, 1, 1, 1, 1, 1, 2016, 'https://www.youtube.com/embed/r_w9gRRbC6s', 'Hi ! I’m Jessica, Business Administration student at KU Leuven. I’m very social and dynamic, love the contact with people and solving challenges.
 
 I started these studies because my goal is to make a lasting positive impact. The cause I particularly care about is children education. I started the initiative “Sponsor a Child in Africa” at KUL, counting 300+ contributing students.
 
-My ideal job would be working for an international company involved with social causes, so I can take my contributions to the next level.');
+My ideal job would be working for an international company involved with social causes, so I can take my contributions to the next level.', 'My career goals are...', 'Once I tried bugee jumping and the rope broke. No kidding ! Hopefully, there was a big river below me !', '- L''Oréal, Wild Ombre marketing campaign
+- Sponsor a Child in Africa initiative
+- Event organization at Dolce Events');
 
 /*
  * student_profile_skill
@@ -103,13 +108,6 @@ INSERT INTO grade (student_profile_id, course_id, grade_actual, grade_max, degre
   VALUES (1, 2, 18.5, 20, 1, 1, 6, 2);
 
 /*
- * media
- */
-INSERT INTO media (student_profile_id, title, media_type_id, position) VALUES (1, 'L''Oréal, Wild Ombre marketing campaign', 1, 1);
-INSERT INTO media (student_profile_id, title, media_type_id, position) VALUES (1, 'Sponsor a Child in Africa initiative', 2, 2);
-INSERT INTO media (student_profile_id, title, media_type_id, url, position) VALUES (1, 'Event organization at Dolce Events', 3, 'https://youtu.be/lu_oG7hD4wQ', 3);
-
-/*
  * education
  */
 INSERT INTO education (student_profile_id, degree_id, faculty_id, university_id, is_erasmus, start_date, end_date)
@@ -136,8 +134,8 @@ INSERT INTO experience (student_profile_id, experience_type_id, company_id, star
 INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, position)
   VALUES (1, 1, TRUE, 1);
 
-INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, listening_level, speaking_level, reading_level, writing_level, position)
-  VALUES (1, 2, FALSE, 1, 2, 3, 4, 2);
+INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, level, position)
+  VALUES (1, 2, FALSE, 4, 2);
 
-INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, listening_level, speaking_level, reading_level, writing_level, position)
-  VALUES (1, 3, FALSE, 1, 2, 3, 4, 3);
+INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, level, position)
+  VALUES (1, 3, FALSE, 3.5, 3);

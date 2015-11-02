@@ -1,19 +1,19 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  let Company = sequelize.define('Company', {
+  let Country = sequelize.define('Country', {
     name: {
       type: DataTypes.TEXT,
       field: 'name'
     }
   }, {
-    tableName: 'company',
+    tableName: 'country',
     classMethods: {
       associate: models => {
-        Company.hasOne(models.Experience);
+        Country.hasOne(models.StudentProfile);
       }
     }
   });
 
-  return Company;
+  return Country;
 };

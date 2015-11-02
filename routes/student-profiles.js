@@ -9,7 +9,6 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
       include: [
         {model: models.StudentProfileSkill, attributes: ['id']},
         {model: models.StudentProfileLanguage, attributes: ['id']},
-        {model: models.Media, attributes: ['id']},
         {model: models.Grade, attributes: ['id']},
         {model: models.StudentProfileHobby, attributes: ['id']},
         {model: models.Education, attributes: ['id']},

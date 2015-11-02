@@ -1,4 +1,38 @@
 /*
+ * country
+ */
+DROP TABLE IF EXISTS country CASCADE;
+
+CREATE TABLE country
+(
+  id         serial                   NOT NULL,
+  name       text                     NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT country_pkey        PRIMARY KEY (id),
+  CONSTRAINT country_unique_name UNIQUE (name)
+);
+
+ALTER TABLE country OWNER TO dbadmin;
+
+/*
+ * city
+ */
+DROP TABLE IF EXISTS city CASCADE;
+
+CREATE TABLE city
+(
+  id         serial                   NOT NULL,
+  name       text                     NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT city_pkey        PRIMARY KEY (id),
+  CONSTRAINT city_unique_name UNIQUE (name)
+);
+
+ALTER TABLE city OWNER TO dbadmin;
+
+/*
  * faculty
  */
 DROP TABLE IF EXISTS faculty CASCADE;
@@ -154,44 +188,33 @@ CREATE TABLE experience_type
 ALTER TABLE experience_type OWNER TO dbadmin;
 
 /*
- * media_type
- */
-DROP TABLE IF EXISTS media_type CASCADE;
-
-CREATE TABLE media_type
-(
-  id         serial                   NOT NULL,
-  name       text                     NOT NULL,
-  extension  varchar(4),
-  is_youtube boolean,
-  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT media_type_pkey             PRIMARY KEY (id),
-  CONSTRAINT media_type_unique_name      UNIQUE (name),
-  CONSTRAINT media_type_unique_extension UNIQUE (extension)
-);
-
-ALTER TABLE media_type OWNER TO dbadmin;
-
-/*
  * student_profile
  */
 DROP TABLE IF EXISTS student_profile CASCADE;
 
 CREATE TABLE student_profile
 (
-  id            serial  NOT NULL,
-  first_name    text    NOT NULL,
-  last_name     text    NOT NULL,
-  faculty_id    integer,
-  university_id integer,
-  degree_id     integer,
-  degree_year   integer,
-  photo         bytea,
-  about_me      text,
-  created_at    timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at    timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  id                       serial  NOT NULL,
+  first_name               text    NOT NULL,
+  last_name                text    NOT NULL,
+  country_id               integer,
+  city_id                  integer,
+  faculty_id               integer,
+  university_id            integer,
+  degree_id                integer,
+  degree_year              integer,
+  expected_graduation_year integer,
+  photo                    bytea,
+  video_url                text,
+  about_me                 text,
+  aspirations              text,
+  funny_fact               text,
+  projects                 text,
+  created_at               timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at               timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_pkey               PRIMARY KEY (id),
+  CONSTRAINT student_profile_country_id_fkey    FOREIGN KEY (country_id)    REFERENCES country (id),
+  CONSTRAINT student_profile_city_id_fkey       FOREIGN KEY (city_id)       REFERENCES city (id),
   CONSTRAINT student_profile_faculty_id_fkey    FOREIGN KEY (faculty_id)    REFERENCES faculty (id),
   CONSTRAINT student_profile_university_id_fkey FOREIGN KEY (university_id) REFERENCES university (id),
   CONSTRAINT student_profile_degree_id_fkey     FOREIGN KEY (degree_id)     REFERENCES degree (id)
@@ -273,31 +296,6 @@ CREATE TABLE grade
 ALTER TABLE grade OWNER TO dbadmin;
 
 /*
- * media
- */
-DROP TABLE IF EXISTS media CASCADE;
-
-CREATE TABLE media
-(
-  id                 serial                   NOT NULL,
-  student_profile_id integer                  NOT NULL,
-  media_type_id      integer                  NOT NULL,
-  title              text                     NOT NULL,
-  content            bytea,
-  url                text,
-  position           integer                  NOT NULL,
-  created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT media_pkey                    PRIMARY KEY (id),
-  CONSTRAINT media_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT media_media_type_id_fkey      FOREIGN KEY (media_type_id)      REFERENCES media_type (id),
-  CONSTRAINT media_unique                  UNIQUE (student_profile_id, title, media_type_id),
-  CONSTRAINT media_position_unique         UNIQUE (student_profile_id, position)
-);
-
-ALTER TABLE media OWNER TO dbadmin;
-
-/*
  * education
  */
 DROP TABLE IF EXISTS education CASCADE;
@@ -358,20 +356,14 @@ CREATE TABLE student_profile_language
   student_profile_id integer                  NOT NULL,
   language_id        integer                  NOT NULL,
   is_mother_tongue   boolean                  NOT NULL,
-  listening_level    integer,
-  speaking_level     integer,
-  reading_level      integer,
-  writing_level      integer,
+  level              decimal(2,1),
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT student_profile_language_pkey                        PRIMARY KEY (id),
   CONSTRAINT student_profile_language_student_profile_id_fkey     FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT student_profile_language_language_id_fkey            FOREIGN KEY (language_id)        REFERENCES language (id),
-  CONSTRAINT student_profile_language_listening_level_range_check CHECK (listening_level >= 1 AND listening_level <= 4),
-  CONSTRAINT student_profile_language_speaking_level_range_check  CHECK (speaking_level >= 1 AND speaking_level <= 4),
-  CONSTRAINT student_profile_language_reading_level_range_check   CHECK (reading_level >= 1 AND reading_level <= 4),
-  CONSTRAINT student_profile_language_writing_level_range_check   CHECK (writing_level >= 1 AND writing_level <= 4),
+  CONSTRAINT student_profile_language_level_range_check           CHECK (level >= 0 AND level <= 5),
   CONSTRAINT student_profile_language_unique                      UNIQUE (student_profile_id, language_id),
   CONSTRAINT student_profile_language_position_unique             UNIQUE (student_profile_id, position)
 );
