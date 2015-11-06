@@ -57,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
         StudentProfile.hasMany(models.Experience);
         StudentProfile.hasMany(models.Education);
         StudentProfile.hasMany(models.Grade);
+        StudentProfile.hasMany(models.SocialMedia);
       }
     }
   });

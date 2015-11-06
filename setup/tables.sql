@@ -360,15 +360,36 @@ CREATE TABLE student_profile_language
   position           integer                  NOT NULL,
   created_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT student_profile_language_pkey                        PRIMARY KEY (id),
-  CONSTRAINT student_profile_language_student_profile_id_fkey     FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT student_profile_language_language_id_fkey            FOREIGN KEY (language_id)        REFERENCES language (id),
-  CONSTRAINT student_profile_language_level_range_check           CHECK (level >= 0 AND level <= 5),
-  CONSTRAINT student_profile_language_unique                      UNIQUE (student_profile_id, language_id),
-  CONSTRAINT student_profile_language_position_unique             UNIQUE (student_profile_id, position)
+  CONSTRAINT student_profile_language_pkey                    PRIMARY KEY (id),
+  CONSTRAINT student_profile_language_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
+  CONSTRAINT student_profile_language_language_id_fkey        FOREIGN KEY (language_id)        REFERENCES language (id),
+  CONSTRAINT student_profile_language_level_range_check       CHECK (level >= 0 AND level <= 5),
+  CONSTRAINT student_profile_language_unique                  UNIQUE (student_profile_id, language_id),
+  CONSTRAINT student_profile_language_position_unique         UNIQUE (student_profile_id, position)
 );
 
 ALTER TABLE student_profile_language OWNER TO dbadmin;
+
+/*
+ * social_media
+ */
+DROP TABLE IF EXISTS social_media CASCADE;
+
+CREATE TABLE social_media
+(
+  id                   serial                   NOT NULL,
+  student_profile_id   integer                  NOT NULL,
+  url                  text                     NOT NULL,
+  position             integer                  NOT NULL,
+  created_at           timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at           timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT social_media_pkey                    PRIMARY KEY (id),
+  CONSTRAINT social_media_student_profile_id_fkey FOREIGN KEY (student_profile_id)   REFERENCES student_profile (id),
+  CONSTRAINT social_media_unique                  UNIQUE (student_profile_id, url),
+  CONSTRAINT social_media_position_unique         UNIQUE (student_profile_id, position)
+);
+
+ALTER TABLE social_media OWNER TO dbadmin;
 
 /*
  * user_account

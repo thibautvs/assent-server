@@ -139,3 +139,12 @@ INSERT INTO student_profile_language (student_profile_id, language_id, is_mother
 
 INSERT INTO student_profile_language (student_profile_id, language_id, is_mother_tongue, level, position)
   VALUES (1, 3, FALSE, 3.5, 3);
+
+/*
+ * social_media
+ */
+INSERT INTO social_media (student_profile_id, url, position) VALUES (1, 'https://be.linkedin.com/in/thibautvs', 1);
+INSERT INTO social_media (student_profile_id, url, position) VALUES (1, 'https://www.facebook.com/thibaut.vanspaandonck', 2);
+INSERT INTO social_media (student_profile_id, url, position) VALUES (1, 'https://twitter.com/ThibautVS', 3);
+INSERT INTO social_media (student_profile_id, url, position) VALUES (1, 'https://plus.google.com/116008990314748336354', 4);
+INSERT INTO social_media (student_profile_id, url, position) VALUES (1, 'https://github.com/urge2code', 5);
