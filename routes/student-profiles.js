@@ -24,7 +24,8 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
       videoUrl: req.body.studentProfile.videoUrl,
       aspirations: req.body.studentProfile.aspirations,
       funnyFact: req.body.studentProfile.funnyFact,
-      aboutMe: req.body.studentProfile.aboutMe
+      aboutMe: req.body.studentProfile.aboutMe,
+      projects: req.body.studentProfile.projects
     };
     sequelizeUtils.update(StudentProfile, updateParams, req, res, next);
   });
