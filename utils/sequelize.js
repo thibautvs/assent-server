@@ -11,13 +11,20 @@ exports.findAll = (model, res, next) => {
 };
 
 exports.findById = (model, req, res, next) => {
-  this.findWhere(model, {where:{id:req.params.id}}, res, next);
+  this.findWhere(model, {where: {id: req.params.id}}, res, next);
 };
 
 exports.findWhere = (model, options, res, next) => {
   model
     .find(options)
     .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : buildJson(model, data)))
+    .catch(err => next(err));
+};
+
+exports.update = (model, updateParams, req, res, next) => {
+  model
+    .update(updateParams, {where: {id: req.params.id}})
+    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
     .catch(err => next(err));
 };
 

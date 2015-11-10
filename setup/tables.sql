@@ -384,7 +384,7 @@ CREATE TABLE social_media
   created_at           timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at           timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT social_media_pkey                    PRIMARY KEY (id),
-  CONSTRAINT social_media_student_profile_id_fkey FOREIGN KEY (student_profile_id)   REFERENCES student_profile (id),
+  CONSTRAINT social_media_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
   CONSTRAINT social_media_unique                  UNIQUE (student_profile_id, url),
   CONSTRAINT social_media_position_unique         UNIQUE (student_profile_id, position)
 );

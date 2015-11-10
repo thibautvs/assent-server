@@ -18,4 +18,11 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     };
     sequelizeUtils.findWhere(StudentProfile, options, res, next);
   });
+
+  app.put('/studentProfiles/:id', (req, res, next) => {
+    let updateParams = {
+      videoUrl: req.body.studentProfile.videoUrl
+    };
+    sequelizeUtils.update(StudentProfile, updateParams, req, res, next);
+  });
 };
