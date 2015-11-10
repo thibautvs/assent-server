@@ -23,7 +23,8 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     let updateParams = {
       videoUrl: req.body.studentProfile.videoUrl,
       aspirations: req.body.studentProfile.aspirations,
-      funnyFact: req.body.studentProfile.funnyFact
+      funnyFact: req.body.studentProfile.funnyFact,
+      aboutMe: req.body.studentProfile.aboutMe
     };
     sequelizeUtils.update(StudentProfile, updateParams, req, res, next);
   });
