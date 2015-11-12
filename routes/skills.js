@@ -10,4 +10,8 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.get('/skills/:id', (req, res, next) => {
     sequelizeUtils.findById(Skill, req, res, next);
   });
+
+  app.post('/skills', (req, res, next) => {
+    sequelizeUtils.findOrCreate(Skill, {where: {name: req.body.skill.name}}, res, next);
+  });
 };

@@ -20,13 +20,15 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   });
 
   app.put('/studentProfiles/:id', (req, res, next) => {
-    let updateParams = {
-      videoUrl: req.body.studentProfile.videoUrl,
-      aspirations: req.body.studentProfile.aspirations,
-      funnyFact: req.body.studentProfile.funnyFact,
-      aboutMe: req.body.studentProfile.aboutMe,
-      projects: req.body.studentProfile.projects
+    let profile = req.body.studentProfile;
+    let values = {
+      videoUrl: profile.videoUrl,
+      aspirations: profile.aspirations,
+      funnyFact: profile.funnyFact,
+      aboutMe: profile.aboutMe,
+      projects: profile.projects,
+      studentProfileSkills: profile.studentProfileSkills
     };
-    sequelizeUtils.update(StudentProfile, updateParams, req, res, next);
+    sequelizeUtils.update(StudentProfile, values, req, res, next);
   });
 };

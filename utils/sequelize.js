@@ -21,9 +21,30 @@ exports.findWhere = (model, options, res, next) => {
     .catch(err => next(err));
 };
 
-exports.update = (model, updateParams, req, res, next) => {
+exports.findOrCreate = (model, options, res, next) => {
   model
-    .update(updateParams, {where: {id: req.params.id}})
+    .findOrCreate(options)
+    .then(data => res.send(buildJson(model, data[0])))
+    .catch(err => next(err));
+};
+
+exports.create = (model, values, res, next) => {
+  model
+    .create(values)
+    .then(data => res.status(HttpStatus.CREATED).send(buildJson(model, data)))
+    .catch(err => next(err));
+};
+
+exports.update = (model, values, req, res, next) => {
+  model
+    .update(values, {where: {id: req.params.id}})
+    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
+    .catch(err => next(err));
+};
+
+exports.delete = (model, req, res, next) => {
+  model
+    .destroy({where: {id: req.params.id}})
     .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
     .catch(err => next(err));
 };
