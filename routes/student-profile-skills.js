@@ -7,10 +7,6 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     sequelizeUtils.findById(StudentProfileSkill, req, res, next);
   });
 
-  app.delete('/studentProfileSkills/:id', (req, res, next) => {
-    sequelizeUtils.delete(StudentProfileSkill, req, res, next);
-  });
-
   app.post('/studentProfileSkills', (req, res, next) => {
     let profileSkill = req.body.studentProfileSkill;
     let values = {
@@ -19,5 +15,9 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
       student_profile_id: profileSkill.studentProfile
     };
     sequelizeUtils.create(StudentProfileSkill, values, res, next);
+  });
+
+  app.delete('/studentProfileSkills/:id', (req, res, next) => {
+    sequelizeUtils.delete(StudentProfileSkill, req, res, next);
   });
 };
