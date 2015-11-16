@@ -38,14 +38,14 @@ exports.create = (model, values, res, next) => {
 exports.update = (model, values, req, res, next) => {
   model
     .update(values, {where: {id: req.params.id}})
-    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
+    .then(data => res.sendStatus(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
     .catch(err => next(err));
 };
 
 exports.delete = (model, req, res, next) => {
   model
     .destroy({where: {id: req.params.id}})
-    .then(data => res.send(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
+    .then(data => res.sendStatus(data === null ? HttpStatus.NOT_FOUND : HttpStatus.NO_CONTENT))
     .catch(err => next(err));
 };
 
