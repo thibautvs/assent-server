@@ -22,6 +22,14 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.put('/studentProfiles/:id', (req, res, next) => {
     let profile = req.body.studentProfile;
     let values = {
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      faculty_id: profile.faculty,
+      degree_id: profile.degree,
+      city_id: profile.city,
+      degreeYear: profile.degreeYear,
+      expectedGraduationYear: profile.expectedGraduationYear,
+      country_id: profile.country,
       videoUrl: profile.videoUrl,
       aspirations: profile.aspirations,
       funnyFact: profile.funnyFact,

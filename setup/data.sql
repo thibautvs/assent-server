@@ -44,7 +44,13 @@ INSERT INTO course (name) VALUES ('Management');
 /*
  * degree
  */
+INSERT INTO degree (name) VALUES ('Bachelor');
 INSERT INTO degree (name) VALUES ('Master');
+INSERT INTO degree (name) VALUES ('Engineer');
+INSERT INTO degree (name) VALUES ('Doctor of Medicine');
+INSERT INTO degree (name) VALUES ('Juris Doctor');
+INSERT INTO degree (name) VALUES ('MBA');
+INSERT INTO degree (name) VALUES ('PhD');
 
 /*
  * experience_type
@@ -71,7 +77,7 @@ INSERT INTO language (name, code) VALUES ('English', 'en');
  * student_profile
  */
 INSERT INTO student_profile (first_name, last_name, country_id, city_id, faculty_id, university_id, degree_id, degree_year, expected_graduation_year, video_url, about_me, aspirations, funny_fact, projects)
-  VALUES ('Jessica', 'Martens', 1, 1, 1, 1, 1, 1, 2016, 'https://www.youtube.com/embed/r_w9gRRbC6s', 'Hi ! I’m Jessica, Business Administration student at KU Leuven. I’m very social and dynamic, love the contact with people and solving challenges.
+  VALUES ('Jessica', 'Martens', 1, 1, 1, 1, 2, 1, 2016, 'https://www.youtube.com/embed/r_w9gRRbC6s', 'Hi ! I’m Jessica, Business Administration student at KU Leuven. I’m very social and dynamic, love the contact with people and solving challenges.
 
 I started these studies because my goal is to make a lasting positive impact. The cause I particularly care about is children education. I started the initiative “Sponsor a Child in Africa” at KUL, counting 300+ contributing students.
 
