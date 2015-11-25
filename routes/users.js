@@ -17,15 +17,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     let lastName = req.body.lastName;
     let email = req.body.email;
     let password = req.body.password;
-
-    let isValid = validator.isValid([
-      validator.required(firstName),
-      validator.required(lastName),
-      validator.required(email),
-      validator.email(email),
-      validator.required(password),
-      validator.password(password)
-    ]);
+    let isValid = validate(firstName, lastName, email, password);
 
     if (isValid) {
       email = email.toLowerCase();
@@ -43,6 +35,17 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
       res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
     }
   });
+
+  function validate(firstName, lastName, email, password) {
+    return validator.isValid([
+      validator.required(firstName),
+      validator.required(lastName),
+      validator.required(email),
+      validator.email(email),
+      validator.required(password),
+      validator.password(password)
+    ]);
+  }
 
   function createUser(firstName, lastName, email, password, res, next) {
     StudentProfile
