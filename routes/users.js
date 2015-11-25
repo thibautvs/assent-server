@@ -7,11 +7,7 @@ const workFactor = 10;
 module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   const User = models.User;
   const StudentProfile = models.StudentProfile;
-
-  app.get('/users', (req, res, next) => {
-    return res.send({ user: { id: 1, email: 'vladimir@kremlin.ru' }});
-  });
-
+  
   app.post('/users', (req, res, next) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;

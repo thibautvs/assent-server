@@ -20,7 +20,11 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
               bcrypt.compare(password, data.password, (err, isMatch) => {
                 if (err) { next(err); }
                 else if (isMatch) {
-                  res.send({account_id: data.studentProfileId, access_token: 'secret token'});
+                  res.send({
+                    userId: data.id,
+                    studentProfileId: data.studentProfileId,
+                    access_token: 'secret token'
+                  });
                 } else {
                   invalidCredentials(res);
                 }
