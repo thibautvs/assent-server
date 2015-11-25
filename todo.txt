@@ -1,6 +1,7 @@
 Incomplete features
 -------------------
 
+- Protect routes (header check)
 - Validate create/edit routes (required fields, max length, ...)
 - Case insensitive for findOrCreate (sequelize.js)
 

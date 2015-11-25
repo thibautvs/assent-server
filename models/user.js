@@ -1,7 +1,11 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  let UserAccount = sequelize.define('UserAccount', {
+  let User = sequelize.define('User', {
+    studentProfileId: {
+      type: DataTypes.INTEGER,
+      field: 'student_profile_id'
+    },
     email: {
       type: DataTypes.TEXT,
       field: 'email'
@@ -14,5 +18,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'user_account'
   });
 
-  return UserAccount;
+  return User;
 };
