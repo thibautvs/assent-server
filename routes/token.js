@@ -41,10 +41,9 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   function validate(email, password) {
     return validator.isValid([
       validator.required(email),
-      validator.email(email),
       validator.required(password),
-      /* don't validate password format otherwise if changed,
-         existing users won't be able to log in */
+      /* don't validate email & password formats otherwise, if changed,
+         existing users might not be able to log in */
     ]);
   }
 
