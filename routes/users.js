@@ -18,24 +18,24 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     let isValid = validate(firstName, lastName, email, password, inviteCode);
 
     if (isValid) {
-      InviteCode
-        .update({inUse: true}, {where: {code: inviteCode, inUse: false}})
+      email = email.toLowerCase();
+      User
+        .findOne({where: {email: email}})
         .then(data => {
-          let affectedRows = data[0];
-          if (affectedRows === 1) {
-            email = email.toLowerCase();
-            User
-              .findOne({where: {email: email}})
+          if (data === null) {
+            InviteCode
+              .update({inUse: true}, {where: {code: inviteCode, inUse: false}})
               .then(data => {
-                if (data === null) {
+                let affectedRows = data[0];
+                if (affectedRows === 1) {
                   createUser(firstName, lastName, email, password, res, next);
                 } else {
-                  res.status(HttpStatus.CONFLICT).send({error: 'email_already_exists'});
+                  res.status(HttpStatus.CONFLICT).send({error: 'invalid_invite_code'});
                 }
               })
               .catch(err => next(err));
           } else {
-            res.status(HttpStatus.CONFLICT).send({error: 'invalid_invite_code'});
+            res.status(HttpStatus.CONFLICT).send({error: 'email_already_exists'});
           }
         })
         .catch(err => next(err));
