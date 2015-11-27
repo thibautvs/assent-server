@@ -60,7 +60,9 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     StudentProfile
       .create({
         firstName: firstName,
-        lastName: lastName
+        lastName: lastName,
+        country_id: 1,
+        university_id: 1
       })
       .then(data => {
         bcrypt.genSalt(workFactor, (err, salt) => {
