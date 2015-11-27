@@ -1,14 +1,4 @@
 /*
- * country
- */
-INSERT INTO country (name) VALUES ('Belgium');
-
-/*
- * city
- */
-INSERT INTO city (name) VALUES ('Brussels');
-
-/*
  * faculty
  */
 INSERT INTO faculty (name) VALUES ('Business Administration');
@@ -16,7 +6,6 @@ INSERT INTO faculty (name) VALUES ('Business Administration');
 /*
  * university
  */
-INSERT INTO university (name) VALUES ('KU Leuven');
 INSERT INTO university (name) VALUES ('Università Roma');
 
 /*
@@ -42,17 +31,6 @@ INSERT INTO course (name) VALUES ('Marketing');
 INSERT INTO course (name) VALUES ('Management');
 
 /*
- * degree
- */
-INSERT INTO degree (name) VALUES ('Bachelor');
-INSERT INTO degree (name) VALUES ('Master');
-INSERT INTO degree (name) VALUES ('Engineer');
-INSERT INTO degree (name) VALUES ('Doctor of Medicine');
-INSERT INTO degree (name) VALUES ('Juris Doctor');
-INSERT INTO degree (name) VALUES ('MBA');
-INSERT INTO degree (name) VALUES ('PhD');
-
-/*
  * experience_type
  */
 INSERT INTO experience_type (name) VALUES ('Internship');
@@ -65,13 +43,6 @@ INSERT INTO experience_type (name) VALUES ('Extra curricular');
 INSERT INTO company (name) VALUES ('L''Oreal Paris');
 INSERT INTO company (name) VALUES ('Sponsor a Child in Africa');
 INSERT INTO company (name) VALUES ('Dolce Events');
-
-/*
- * language
- */
-INSERT INTO language (name, code) VALUES ('Dutch', 'nl');
-INSERT INTO language (name, code) VALUES ('French', 'fr');
-INSERT INTO language (name, code) VALUES ('English', 'en');
 
 /*
  * student_profile
