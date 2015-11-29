@@ -1,6 +1,7 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
+const RSVP = require('rsvp');
 const validator = require('../utils/validator');
 const workFactor = 10;
 
@@ -15,7 +16,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     let email = req.body.email;
     let password = req.body.password;
     let inviteCode = req.body.inviteCode;
-    let isValid = validate(firstName, lastName, email, password, inviteCode);
+    let isValid = validateCreateUserFields(firstName, lastName, email, password, inviteCode);
 
     if (isValid) {
       email = email.toLowerCase();
@@ -44,7 +45,42 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     }
   });
 
-  function validate(firstName, lastName, email, password, inviteCode) {
+  app.put('/users/:id', (req, res, next) => {
+    let userId = req.params.id;
+    let currentPassword = req.body.currentPassword;
+    let newPassword = req.body.newPassword;
+    let isValid = validator.isValid([
+      validator.required(userId),
+      validator.required(currentPassword),
+      validator.required(newPassword),
+      validator.password(newPassword)
+    ]);
+
+    if (isValid) {
+      User
+        .findOne({where: {id: userId}})
+        .then(data => {
+          bcrypt.compare(currentPassword, data.password, (err, isMatch) => {
+            if (err) { next(err); }
+            else if (isMatch) {
+              hashPassword(newPassword).then(hash => {
+                User
+                  .update({password: hash}, {where: {id: userId}})
+                  .then(data => res.sendStatus(HttpStatus.NO_CONTENT))
+                  .catch(err => next(err));
+              }, err => next(err));
+            } else {
+              res.status(HttpStatus.BAD_REQUEST).send({error: 'invalid_password'});
+            }
+          });
+        })
+        .catch(err => next(err));
+    } else {
+      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+    }
+  });
+
+  function validateCreateUserFields(firstName, lastName, email, password, inviteCode) {
     return validator.isValid([
       validator.required(firstName),
       validator.required(lastName),
@@ -65,25 +101,33 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
         university_id: 1
       })
       .then(data => {
-        bcrypt.genSalt(workFactor, (err, salt) => {
-          if (err) { next(err); }
-          else {
-            bcrypt.hash(password, salt, (err, hash) => {
-              if (err) { next(err); }
-              else {
-                User
-                  .create({
-                    studentProfileId: data.id,
-                    email: email,
-                    password: hash
-                  })
-                  .then(data => res.status(HttpStatus.CREATED).send({id: data.id}))
-                  .catch(err => next(err));
-              }
-            });
-          }
-        });
+        hashPassword(password).then(hash => {
+          User
+           .create({
+             studentProfileId: data.id,
+             email: email,
+             password: hash
+           })
+           .then(data => res.status(HttpStatus.CREATED).send({id: data.id}))
+           .catch(err => next(err));
+        }, err => next(err));
       })
       .catch(err => next(err));
+  }
+
+  function hashPassword(password) {
+    return new RSVP.Promise((resolve, reject) => {
+      bcrypt.genSalt(workFactor, (err, salt) => {
+        if (err) { reject(err); }
+        else {
+          bcrypt.hash(password, salt, (err, hash) => {
+            if (err) { reject(err); }
+            else {
+              resolve(hash);
+            }
+          });
+        }
+      });
+    });
   }
 };

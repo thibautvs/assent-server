@@ -17,3 +17,10 @@ Improvements
 - logger (morgan, ...)
 - consider using Amazon Glacier to reduce S3 costs
 - consider using Container Service (docker) : http://aws.amazon.com/containers/?sc_channel=em&sc_campaign=cross_sell&sc_publisher=aws&sc_medium=em_143341850&sc_content=cross_sell_ecs&sc_detail=en_cross_sell_ec2snssqs-ecs&sc_geo=global&sc_segment=em_1294597252&ref_=pe_1876150_143341850_10
+
+After alpha
+-----------
+
+- Remove invite code (users.js + model)
+- Remove 'KU Leuven' and 'Belgium' as default IDs (users.js)
+- Remove invite_code table in prod DB and in scripts (tables.sql and seed_data.sql)
