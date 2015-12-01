@@ -14,9 +14,7 @@ exports.email = value => {
 };
 
 exports.password = value => {
-  return value !== undefined
-    && value.length >= 6
-    && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/.test(value);
+  return value !== undefined && value.length >= 6;
 };
 
 exports.isValid = validations => {
