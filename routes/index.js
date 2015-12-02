@@ -7,6 +7,7 @@ const HttpStatus = require('http-status');
 
 exports.initialize = (app, models) => {
   initializeRoutes(path.join(__dirname, 'public'), app, models);
+  initializeTokenCheck(app);
   initializeRoutes(path.join(__dirname, 'protected'), app, models);
   initializeGlobalErrorHandler(app);
 };
@@ -16,6 +17,16 @@ function initializeRoutes(routesPath, app, models) {
     .readdirSync(routesPath)
     .filter(file => file.indexOf('.') !== 0 && file !== 'index.js')
     .forEach(file => require(path.join(routesPath, file))(app, models, sequelizeUtils, HttpStatus));
+}
+
+function initializeTokenCheck(app) {
+  app.use((req, res, next) => {
+    if (req.headers['authorization'] === 'Bearer secret token') {
+      next();
+    } else {
+      res.status(HttpStatus.UNAUTHORIZED).send({ message: HttpStatus[HttpStatus.UNAUTHORIZED] });
+    }
+  });
 }
 
 function initializeGlobalErrorHandler(app) {
