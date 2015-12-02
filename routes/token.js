@@ -10,7 +10,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     if (req.body.grant_type === 'password') {
       let email = req.body.username;
       let password = req.body.password;
-      let isValid = validate(email, password);
+      let isValid = validateCredentials(email, password);
 
       if (isValid) {
         User
@@ -42,7 +42,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
     }
   });
 
-  function validate(email, password) {
+  function validateCredentials(email, password) {
     return validator.isValid([
       validator.required(email),
       validator.required(password),

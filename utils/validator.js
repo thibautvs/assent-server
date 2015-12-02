@@ -1,6 +1,6 @@
 /* IMPORTANT
  *   - every change in this file must also be implemented client-side
- *   - if a regex rule changes, then related messages have to be adapted
+ *   - if a validation rule changes, then related messages have to be adapted
  */
 
 'use strict';
