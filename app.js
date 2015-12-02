@@ -12,11 +12,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 routes.initialize(app, models);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Internal Server Error');
-});
-
 const server = app.listen(process.env.PORT || 3000, () => {
   const host = server.address();
   console.log('API running at http://%s:%s', host.address, host.port);

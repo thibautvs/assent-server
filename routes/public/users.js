@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcrypt');
 const RSVP = require('rsvp');
-const validator = require('../utils/validator');
+const validator = require('../../utils/validator');
 const workFactor = 10;
 
 module.exports = (app, models, sequelizeUtils, HttpStatus) => {
