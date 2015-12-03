@@ -1,8 +1,7 @@
 Incomplete features
 -------------------
 
-- /token route : change 'secret token' to production-ready token
-- Protect routes (header check)
+- Secret token : implement tokens generation + revoke (node UUID etc)
 - Validate create/edit routes (required fields, max length, ...)
 - Case insensitive for findOrCreate (sequelize.js)
 

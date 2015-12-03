@@ -21,7 +21,7 @@ function initializeRoutes(routesPath, app, models) {
 
 function initializeTokenCheck(app) {
   app.use((req, res, next) => {
-    if (req.headers['authorization'] === 'Bearer secret token') {
+    if (req.headers['authorization'] === 'Bearer a1b09800-f8b6-4fb6-8e40-75ebd5744ab8') {
       next();
     } else {
       res.status(HttpStatus.UNAUTHORIZED).send({ message: HttpStatus[HttpStatus.UNAUTHORIZED] });

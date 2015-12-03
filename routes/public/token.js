@@ -23,7 +23,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
                   res.send({
                     userId: data.id,
                     studentProfileId: data.studentProfileId,
-                    access_token: 'secret token'
+                    access_token: 'a1b09800-f8b6-4fb6-8e40-75ebd5744ab8'
                   });
                 } else {
                   invalidCredentials(res);
