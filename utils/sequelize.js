@@ -28,6 +28,23 @@ exports.findOrCreate = (model, options, res, next) => {
     .catch(err => next(err));
 };
 
+exports.findCaseInsensitiveOrCreate = (model, values, res, next) => {
+  let field = Object.keys(values)[0];
+  let options = {where: {}};
+  options.where[field] = {ilike: {}};
+  options.where[field].ilike = values[field];
+  model
+    .find(options)
+    .then(data => {
+      if (data === null) {
+        this.create(model, values, res, next);
+      } else {
+        res.send(buildJson(model, data));
+      }
+    })
+    .catch(err => next(err));
+};
+
 exports.create = (model, values, res, next) => {
   model
     .create(values)
