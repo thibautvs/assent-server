@@ -12,6 +12,6 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   });
 
   app.post('/skills', (req, res, next) => {
-    sequelizeUtils.findOrCreate(Skill, {where: {name: req.body.skill.name}}, res, next);
+    sequelizeUtils.findOrCreate(Skill, {where: {name: {ilike: req.body.skill.name}}}, res, next);
   });
 };

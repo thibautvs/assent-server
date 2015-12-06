@@ -3,7 +3,6 @@ Incomplete features
 
 - Secret token : implement tokens generation + revoke (node UUID etc)
 - Validate create/edit routes (required fields, max length, ...)
-- Case insensitive for findOrCreate (sequelize.js)
 
 Technical debt
 --------------

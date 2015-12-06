@@ -8,6 +8,6 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   });
 
   app.post('/cities', (req, res, next) => {
-    sequelizeUtils.findOrCreate(City, {where: {name: req.body.city.name}}, res, next);
+    sequelizeUtils.findOrCreate(City, {where: {name: {ilike: req.body.city.name}}}, res, next);
   });
 };
