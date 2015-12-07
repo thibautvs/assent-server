@@ -1,5 +1,7 @@
 'use strict';
 
+const validator = require('../../utils/validator');
+
 module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   const StudentProfile = models.StudentProfile;
 
@@ -21,22 +23,35 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
 
   app.put('/studentProfiles/:id', (req, res, next) => {
     let profile = req.body.studentProfile;
-    let values = {
-      firstName: profile.firstName,
-      lastName: profile.lastName,
-      faculty_id: profile.faculty,
-      degree_id: profile.degree,
-      city_id: profile.city,
-      degreeYear: profile.degreeYear,
-      expectedGraduationYear: profile.expectedGraduationYear,
-      country_id: profile.country,
-      videoUrl: profile.videoUrl,
-      aspirations: profile.aspirations,
-      funnyFact: profile.funnyFact,
-      aboutMe: profile.aboutMe,
-      projects: profile.projects,
-      studentProfileSkills: profile.studentProfileSkills
-    };
-    sequelizeUtils.update(StudentProfile, values, req, res, next);
+    let isValid = validate(profile);
+
+    if (isValid) {
+      let values = {
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        faculty_id: profile.faculty,
+        degree_id: profile.degree,
+        city_id: profile.city,
+        degreeYear: profile.degreeYear,
+        expectedGraduationYear: profile.expectedGraduationYear,
+        country_id: profile.country,
+        videoUrl: profile.videoUrl,
+        aspirations: profile.aspirations,
+        funnyFact: profile.funnyFact,
+        aboutMe: profile.aboutMe,
+        projects: profile.projects,
+        studentProfileSkills: profile.studentProfileSkills
+      };
+      sequelizeUtils.update(StudentProfile, values, req, res, next);
+    } else {
+      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+    }
   });
 };
+
+function validate(profile) {
+  return validator.isValid([
+    validator.required(profile.videoUrl),
+    validator.video(profile.videoUrl)
+  ]);
+}
