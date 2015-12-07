@@ -4,6 +4,7 @@
  */
 
 'use strict';
+const _ = require('lodash');
 
 exports.required = value => {
   return value !== undefined && value.trim().length > 0;
@@ -15,6 +16,12 @@ exports.email = value => {
 
 exports.password = value => {
   return value !== undefined && value.length >= 6;
+};
+
+exports.video = value => {
+  return value !== undefined &&
+    (_.startsWith(value.toLowerCase(), 'https://www.youtube.com/embed/')
+    || _.startsWith(value.toLowerCase(), 'https://player.vimeo.com/video/'));
 };
 
 exports.isValid = validations => {
