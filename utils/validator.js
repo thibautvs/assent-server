@@ -20,10 +20,24 @@ exports.password = value => {
 
 exports.video = value => {
   return value !== undefined &&
-    (_.startsWith(value.toLowerCase(), 'https://www.youtube.com/embed/')
-    || _.startsWith(value.toLowerCase(), 'https://player.vimeo.com/video/'));
+    (startsWith(value, 'https://www.youtube.com/embed/')
+    || startsWith(value, 'https://player.vimeo.com/video/'));
+};
+
+exports.socialMedium = value => {
+  return value !== undefined &&
+    (startsWith(value, 'https://www.facebook.com/')
+    || startsWith(value, 'https://twitter.com/')
+    || startsWith(value, 'https://www.linkedin.com/in/')
+    || startsWith(value, 'https://plus.google.com/')
+    || startsWith(value, 'https://github.com/')
+    || startsWith(value, 'https://www.instagram.com/'));
 };
 
 exports.isValid = validations => {
   return validations.every(v => v === true);
 };
+
+function startsWith(value, start) {
+  return _.startsWith(value.trim().toLowerCase(), start);
+}
