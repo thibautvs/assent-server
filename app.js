@@ -20,5 +20,14 @@ const options = {
   cert: fs.readFileSync(path.join(__dirname, 'ssl', 'api_assent_io.crt'), 'utf8')
 };
 const server = https.createServer(options, app).listen(443, null, null, () => {
+  /* 443 is the HTTPS port so that it offers the convenience to omit the port in the URL
+   * (api.assent.io instead of api.assent.io:3000 for example). However, ports below 1024
+   * require root permissions, which is really bad practice for running an app. So, once the
+   * server is started, we revert to the permissions of the user that used the SUDO command.
+   */
+  let uid = parseInt(process.env.SUDO_UID);
+  if (uid) {
+    process.setuid(uid);
+  }
   console.log('API listening on port %d in %s mode', server.address().port, app.settings.env);
 });
