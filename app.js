@@ -17,7 +17,12 @@ routes.initialize(app, models);
 
 const options = {
   key: fs.readFileSync(path.join(__dirname, 'ssl', 'api_assent_io.key'), 'utf8'),
-  cert: fs.readFileSync(path.join(__dirname, 'ssl', 'api_assent_io.crt'), 'utf8')
+  cert: fs.readFileSync(path.join(__dirname, 'ssl', 'api_assent_io.crt'), 'utf8'),
+  ca: [
+    fs.readFileSync(path.join(__dirname, 'ssl', 'ca_bundle_part_01.crt'), 'utf8'),
+    fs.readFileSync(path.join(__dirname, 'ssl', 'ca_bundle_part_02.crt'), 'utf8'),
+    fs.readFileSync(path.join(__dirname, 'ssl', 'ca_bundle_part_03.crt'), 'utf8')
+  ]
 };
 const server = https.createServer(options, app).listen(443, null, null, () => {
   /* 443 is the HTTPS port so that it offers the convenience to omit the port in the URL
