@@ -51,7 +51,6 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
 
 function validate(profile) {
   return validator.isValid([
-    validator.required(profile.videoUrl),
     validator.video(profile.videoUrl)
   ]);
 }

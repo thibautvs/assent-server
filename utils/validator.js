@@ -19,9 +19,11 @@ exports.password = value => {
 };
 
 exports.video = value => {
-  return value !== undefined &&
-    (startsWith(value, 'https://www.youtube.com/embed/')
-    || startsWith(value, 'https://player.vimeo.com/video/'));
+  if (value) {
+    return startsWith(value, 'https://www.youtube.com/embed/')
+      || startsWith(value, 'https://player.vimeo.com/video/');
+  }
+  return true;
 };
 
 exports.socialMedium = value => {
