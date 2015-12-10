@@ -28,12 +28,12 @@ exports.video = value => {
 
 exports.socialMedium = value => {
   return value !== undefined &&
-    (startsWith(value, 'https://www.facebook.com/')
-    || startsWith(value, 'https://twitter.com/')
-    || startsWith(value, 'https://www.linkedin.com/in/')
-    || startsWith(value, 'https://plus.google.com/')
-    || startsWith(value, 'https://github.com/')
-    || startsWith(value, 'https://www.instagram.com/'));
+    (contains(value, 'facebook.com/')
+    || contains(value, 'twitter.com/')
+    || contains(value, 'linkedin.com/in/')
+    || contains(value, 'plus.google.com/')
+    || contains(value, 'github.com/')
+    || contains(value, 'instagram.com/'));
 };
 
 exports.isValid = validations => {
@@ -42,4 +42,8 @@ exports.isValid = validations => {
 
 function startsWith(value, start) {
   return _.startsWith(value.trim().toLowerCase(), start);
+}
+
+function contains(value, substring) {
+  return value.toLowerCase().indexOf(substring.toLowerCase()) !== -1;
 }
