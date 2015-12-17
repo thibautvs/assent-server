@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       associate: models => {
         StudentProfile.belongsTo(models.Country);
         StudentProfile.belongsTo(models.City);
-        StudentProfile.belongsTo(models.Faculty);
+        StudentProfile.belongsTo(models.Study);
         StudentProfile.belongsTo(models.University);
         StudentProfile.belongsTo(models.Degree);
         StudentProfile.hasMany(models.StudentProfileSkill);

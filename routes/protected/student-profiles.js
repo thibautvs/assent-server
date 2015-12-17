@@ -29,7 +29,7 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
       let values = {
         firstName: profile.firstName,
         lastName: profile.lastName,
-        faculty_id: profile.faculty,
+        study_id: profile.study,
         degree_id: profile.degree,
         city_id: profile.city,
         degreeYear: profile.degreeYear,

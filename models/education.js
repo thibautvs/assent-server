@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       associate: models => {
         Education.belongsTo(models.StudentProfile);
         Education.belongsTo(models.Degree);
-        Education.belongsTo(models.Faculty);
+        Education.belongsTo(models.Study);
         Education.belongsTo(models.University);
       }
     }

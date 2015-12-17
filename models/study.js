@@ -1,19 +1,19 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  let Faculty = sequelize.define('Faculty', {
+  let Study = sequelize.define('Study', {
     name: {
       type: DataTypes.TEXT,
       field: 'name'
     }
   }, {
-    tableName: 'faculty',
+    tableName: 'study',
     classMethods: {
       associate: models => {
-        Faculty.hasOne(models.Education);
+        Study.hasOne(models.Education);
       }
     }
   });
 
-  return Faculty;
+  return Study;
 };
