@@ -26,21 +26,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       field: 'video_url'
     },
-    aboutMe: {
+    drive: {
       type: DataTypes.TEXT,
-      field: 'about_me'
+      field: 'drive'
     },
     aspirations: {
       type: DataTypes.TEXT,
       field: 'aspirations'
     },
-    funnyFact: {
+    preparation: {
       type: DataTypes.TEXT,
-      field: 'funny_fact'
+      field: 'preparation'
     },
-    projects: {
+    strongestSkill: {
       type: DataTypes.TEXT,
-      field: 'projects'
+      field: 'strongest_skill'
     }
   }, {
     tableName: 'student_profile',

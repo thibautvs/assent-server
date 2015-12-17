@@ -37,9 +37,9 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
         country_id: profile.country,
         videoUrl: profile.videoUrl,
         aspirations: profile.aspirations,
-        funnyFact: profile.funnyFact,
-        aboutMe: profile.aboutMe,
-        projects: profile.projects,
+        preparation: profile.preparation,
+        drive: profile.drive,
+        strongestSkill: profile.strongestSkill,
         studentProfileSkills: profile.studentProfileSkills
       };
       sequelizeUtils.update(StudentProfile, values, req, res, next);
