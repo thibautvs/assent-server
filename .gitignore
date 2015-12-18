@@ -1,5 +1,6 @@
 !.gitkeep
 node_modules/
+ssl/dev
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
