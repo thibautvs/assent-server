@@ -52,6 +52,19 @@ exports.create = (model, values, res, next) => {
     .catch(err => next(err));
 };
 
+exports.createIfNotExists = (model, options, values, res, next) => {
+  model
+    .find(options)
+    .then(data => {
+      if (data === null) {
+        this.create(model, values, res, next);
+      } else {
+        res.status(HttpStatus.BAD_REQUEST).send({error: 'already_exists'});
+      }
+    })
+    .catch(err => next(err));
+};
+
 exports.update = (model, values, req, res, next) => {
   model
     .update(values, {where: {id: req.params.id}})

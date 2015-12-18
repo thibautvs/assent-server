@@ -15,7 +15,8 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
         {model: models.StudentProfileHobby, attributes: ['id']},
         {model: models.Education, attributes: ['id']},
         {model: models.Experience, attributes: ['id']},
-        {model: models.SocialMedia, attributes: ['id']}
+        {model: models.SocialMedia, attributes: ['id']},
+        {model: models.Audio, attributes: ['id']}
       ]
     };
     sequelizeUtils.findWhere(StudentProfile, options, res, next);

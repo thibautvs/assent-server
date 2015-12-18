@@ -7,15 +7,15 @@
 const _ = require('lodash');
 
 exports.required = value => {
-  return value !== undefined && value.trim().length > 0;
+  return value && value.trim().length > 0;
 };
 
 exports.email = value => {
-  return value !== undefined && /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/.test(value);
+  return value && /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/.test(value);
 };
 
 exports.password = value => {
-  return value !== undefined && value.length >= 6;
+  return value && value.length >= 6;
 };
 
 exports.video = value => {
@@ -26,8 +26,12 @@ exports.video = value => {
   return true;
 };
 
+exports.audio = value => {
+  return value && startsWith(value, 'https://w.soundcloud.com/player/');
+};
+
 exports.socialMedium = value => {
-  return value !== undefined &&
+  return value &&
     (contains(value, 'facebook.com/')
     || contains(value, 'twitter.com/')
     || contains(value, 'linkedin.com/in/')
