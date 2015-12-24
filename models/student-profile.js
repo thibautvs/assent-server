@@ -26,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       field: 'video_url'
     },
-    drive: {
-      type: DataTypes.TEXT,
-      field: 'drive'
-    },
     aspirations: {
       type: DataTypes.TEXT,
       field: 'aspirations'
@@ -59,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         StudentProfile.hasMany(models.Grade);
         StudentProfile.hasMany(models.SocialMedia);
         StudentProfile.hasMany(models.Audio);
+        StudentProfile.hasMany(models.Drive);
       }
     }
   });
