@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const StudentProfile = models.StudentProfile;
 
@@ -27,8 +29,8 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
 
     if (isValid) {
       let values = {
-        firstName: profile.firstName,
-        lastName: profile.lastName,
+        firstName: _.capitalize(profile.firstName),
+        lastName: _.capitalize(profile.lastName),
         study_id: profile.study,
         degree_id: profile.degree,
         city_id: profile.city,

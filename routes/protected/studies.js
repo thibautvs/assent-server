@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const Study = models.Study;
 
@@ -12,6 +14,6 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   });
 
   app.post('/studies', (req, res, next) => {
-    sequelizeUtils.findCaseInsensitiveOrCreate(Study, {name: req.body.study.name}, res, next);
+    sequelizeUtils.findCaseInsensitiveOrCreate(Study, {name: _.capitalize(req.body.study.name)}, res, next);
   });
 };

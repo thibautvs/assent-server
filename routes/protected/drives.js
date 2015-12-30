@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const Drive = models.Drive;
 
@@ -12,8 +14,8 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
     let isValid = validate(drive);
     if (isValid) {
       let values = {
-        factor: drive.factor,
-        description: drive.description,
+        factor: _.capitalize(drive.factor),
+        description: _.capitalize(drive.description),
         position: drive.position,
         student_profile_id: drive.studentProfile
       };
@@ -28,8 +30,8 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
     let isValid = validate(drive);
     if (isValid) {
       let values = {
-        factor: drive.factor,
-        description: drive.description,
+        factor: _.capitalize(drive.factor),
+        description: _.capitalize(drive.description),
         position: drive.position,
       };
       sequelizeUtils.update(Drive, values, req, res, next);
