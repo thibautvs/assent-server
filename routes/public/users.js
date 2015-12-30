@@ -2,10 +2,9 @@
 
 const bcrypt = require('bcrypt');
 const RSVP = require('rsvp');
-const validator = require('../../utils/validator');
 const workFactor = 10;
 
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const User = models.User;
   const InviteCode = models.InviteCode;
   const StudentProfile = models.StudentProfile;

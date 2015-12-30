@@ -1,8 +1,6 @@
 'use strict';
 
-const validator = require('../../utils/validator');
-
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const Audio = models.Audio;
 
   app.get('/audios/:id', (req, res, next) => {
@@ -28,10 +26,10 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.delete('/audios/:id', (req, res, next) => {
     sequelizeUtils.delete(Audio, req, res, next);
   });
-};
 
-function validate(audioUrl) {
-  return validator.isValid([
-    validator.audio(audioUrl)
-  ]);
-}
+  function validate(audioUrl) {
+    return validator.isValid([
+      validator.audio(audioUrl)
+    ]);
+  }
+};

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const Hobby = models.Hobby;
 
   app.get('/hobbies', (req, res, next) => {

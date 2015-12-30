@@ -1,8 +1,6 @@
 'use strict';
 
-const validator = require('../../utils/validator');
-
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const StudentProfile = models.StudentProfile;
 
   app.get('/studentProfiles/:id', (req, res, next) => {
@@ -48,10 +46,10 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
       res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
     }
   });
-};
 
-function validate(profile) {
-  return validator.isValid([
-    validator.video(profile.videoUrl)
-  ]);
-}
+  function validate(profile) {
+    return validator.isValid([
+      validator.video(profile.videoUrl)
+    ]);
+  }
+};

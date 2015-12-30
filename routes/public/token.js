@@ -1,9 +1,8 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
-const validator = require('../../utils/validator');
 
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const User = models.User;
 
   app.post('/token', (req, res, next) => {

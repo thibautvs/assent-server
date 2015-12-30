@@ -1,8 +1,6 @@
 'use strict';
 
-const validator = require('../../utils/validator');
-
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const Drive = models.Drive;
 
   app.get('/drives/:id', (req, res, next) => {
@@ -43,11 +41,11 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.delete('/drives/:id', (req, res, next) => {
     sequelizeUtils.delete(Drive, req, res, next);
   });
-};
 
-function validate(drive) {
-  return validator.isValid([
-    validator.required(drive.factor),
-    validator.required(drive.description)
-  ]);
-}
+  function validate(drive) {
+    return validator.isValid([
+      validator.required(drive.factor),
+      validator.required(drive.description)
+    ]);
+  }
+};

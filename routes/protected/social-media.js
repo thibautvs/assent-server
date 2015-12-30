@@ -1,8 +1,6 @@
 'use strict';
 
-const validator = require('../../utils/validator');
-
-module.exports = (app, models, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   const SocialMedia = models.SocialMedia;
 
   app.get('/socialMedia/:id', (req, res, next) => {
@@ -27,11 +25,11 @@ module.exports = (app, models, sequelizeUtils, HttpStatus) => {
   app.delete('/socialMedia/:id', (req, res, next) => {
     sequelizeUtils.delete(SocialMedia, req, res, next);
   });
-};
 
-function validate(socialMedium) {
-  return validator.isValid([
-    validator.required(socialMedium.url),
-    validator.socialMedium(socialMedium.url)
-  ]);
-}
+  function validate(socialMedium) {
+    return validator.isValid([
+      validator.required(socialMedium.url),
+      validator.socialMedium(socialMedium.url)
+    ]);
+  }
+};
