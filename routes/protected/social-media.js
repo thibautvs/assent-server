@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const SocialMedia = models.SocialMedia;
 
   app.get('/socialMedia/:id', (req, res, next) => {
@@ -18,7 +18,7 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
       };
       sequelizeUtils.create(SocialMedia, values, res, next);
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 

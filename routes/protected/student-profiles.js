@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const StudentProfile = models.StudentProfile;
 
   app.get('/studentProfiles/:id', (req, res, next) => {
@@ -45,7 +45,7 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
       };
       sequelizeUtils.update(StudentProfile, values, req, res, next);
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 

@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const City = models.City;
 
   app.get('/cities/:id', (req, res, next) => {

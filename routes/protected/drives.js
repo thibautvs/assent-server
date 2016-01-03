@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const Drive = models.Drive;
 
   app.get('/drives/:id', (req, res, next) => {
@@ -21,7 +21,7 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
       };
       sequelizeUtils.create(Drive, values, res, next);
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 
@@ -36,7 +36,7 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
       };
       sequelizeUtils.update(Drive, values, req, res, next);
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 

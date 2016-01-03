@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const Country = models.Country;
 
   app.get('/countries/:id', (req, res, next) => {

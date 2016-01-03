@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const Course = models.Course;
 
   app.get('/courses', (req, res, next) => {

@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const validator = require('../utils/validator');
 const sequelizeUtils = require('../utils/sequelize');
+const httpResponseUtils = require('../utils/http-response');
 const HttpStatus = require('http-status');
 
 exports.initialize = (app, models) => {
@@ -17,7 +18,7 @@ function initializeRoutes(routesPath, app, models) {
   fs
     .readdirSync(routesPath)
     .filter(file => file.indexOf('.') !== 0 && file !== 'index.js')
-    .forEach(file => require(path.join(routesPath, file))(app, models, validator, sequelizeUtils, HttpStatus));
+    .forEach(file => require(path.join(routesPath, file))(app, models, validator, sequelizeUtils, httpResponseUtils));
 }
 
 function initializeTokenCheck(app) {

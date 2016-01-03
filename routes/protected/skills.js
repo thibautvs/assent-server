@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const Skill = models.Skill;
 
   app.get('/skills', (req, res, next) => {

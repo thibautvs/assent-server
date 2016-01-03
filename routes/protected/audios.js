@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const Audio = models.Audio;
 
   app.get('/audios/:id', (req, res, next) => {
@@ -19,7 +19,7 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
       };
       sequelizeUtils.createIfNotExists(Audio, {where: {url: audio.url}}, values, res, next);
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 

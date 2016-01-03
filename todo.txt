@@ -10,7 +10,6 @@ Technical debt
 Improvements
 ------------
 
-- Create common function for POST validation error to avoid copy-paste
 - Create operations : camelCase instead of snake_case for foreign keys
 - When camelCase for foreign keys done, create util to do the mapping automatically (as same names on both ends)
 - logger (morgan, ...)

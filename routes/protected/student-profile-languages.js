@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const StudentProfileLanguage = models.StudentProfileLanguage;
 
   app.get('/studentProfileLanguages/:id', (req, res, next) => {

@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcrypt');
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const User = models.User;
 
   app.post('/token', (req, res, next) => {
@@ -37,7 +37,7 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
         invalidCredentials(res);
       }
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'unsupported_grant_type'});
+      httpResponseUtils.badRequest(res, 'unsupported_grant_type');
     }
   });
 
@@ -51,6 +51,6 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
   }
 
   function invalidCredentials(res) {
-    res.status(HttpStatus.BAD_REQUEST).send({error: 'invalid_grant'});
+    httpResponseUtils.badRequest(res, 'invalid_grant');
   }
 };

@@ -2,9 +2,10 @@
 
 const bcrypt = require('bcrypt');
 const RSVP = require('rsvp');
+const HttpStatus = require('http-status');
 const workFactor = 10;
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const User = models.User;
   const InviteCode = models.InviteCode;
   const StudentProfile = models.StudentProfile;
@@ -30,17 +31,17 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
                 if (affectedRows === 1) {
                   createUser(firstName, lastName, email, password, res, next);
                 } else {
-                  res.status(HttpStatus.CONFLICT).send({error: 'invalid_invite_code'});
+                  httpResponseUtils.conflict(res, 'invalid_invite_code');
                 }
               })
               .catch(err => next(err));
           } else {
-            res.status(HttpStatus.CONFLICT).send({error: 'email_already_exists'});
+            httpResponseUtils.conflict(res, 'email_already_exists');
           }
         })
         .catch(err => next(err));
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 
@@ -69,13 +70,13 @@ module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
                   .catch(err => next(err));
               }, err => next(err));
             } else {
-              res.status(HttpStatus.BAD_REQUEST).send({error: 'invalid_password'});
+              httpResponseUtils.badRequest(res, 'invalid_password');
             }
           });
         })
         .catch(err => next(err));
     } else {
-      res.status(HttpStatus.BAD_REQUEST).send({error: 'validation_failed'});
+      httpResponseUtils.validationFailed(res);
     }
   });
 

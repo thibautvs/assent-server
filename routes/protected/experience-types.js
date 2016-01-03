@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const ExperienceType = models.ExperienceType;
 
   app.get('/experienceTypes', (req, res, next) => {

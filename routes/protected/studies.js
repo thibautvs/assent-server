@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const Study = models.Study;
 
   app.get('/studies', (req, res, next) => {

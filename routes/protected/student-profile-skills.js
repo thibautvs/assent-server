@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (app, models, validator, sequelizeUtils, HttpStatus) => {
+module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => {
   const StudentProfileSkill = models.StudentProfileSkill;
 
   app.get('/studentProfileSkills/:id', (req, res, next) => {
