@@ -7,12 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       field: 'is_mother_tongue'
     },
     level: {
-      type: DataTypes.DECIMAL(2, 1),
-      field: 'level'
-    },
-    position: {
       type: DataTypes.INTEGER,
-      field: 'position'
+      field: 'level'
     }
   }, {
     tableName: 'student_profile_language',

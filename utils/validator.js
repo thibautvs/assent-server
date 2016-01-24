@@ -7,7 +7,13 @@
 const _ = require('lodash');
 
 exports.required = value => {
-  return value && value.trim().length > 0;
+  if (value !== undefined && value !== null) {
+    if (typeof value === 'string') {
+      return value.trim().length > 0;
+    }
+    return true;
+  }
+  return false;
 };
 
 exports.email = value => {

@@ -14,6 +14,18 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
   });
 
   app.post('/skills', (req, res, next) => {
-    sequelizeUtils.findCaseInsensitiveOrCreate(Skill, {name: _.capitalize(req.body.skill.name)}, res, next);
+    let skill = req.body.skill;
+    let isValid = validate(skill);
+    if (isValid) {
+      sequelizeUtils.findCaseInsensitiveOrCreate(Skill, {name: _.capitalize(skill.name)}, res, next);
+    } else {
+      httpResponseUtils.validationFailed(res);
+    }
   });
+
+  function validate(skill) {
+    return validator.isValid([
+      validator.required(skill.name)
+    ]);
+  }
 };

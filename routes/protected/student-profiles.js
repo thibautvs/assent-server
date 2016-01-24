@@ -40,8 +40,7 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
         videoUrl: profile.videoUrl,
         aspirations: profile.aspirations,
         preparation: profile.preparation,
-        strongestSkill: profile.strongestSkill,
-        studentProfileSkills: profile.studentProfileSkills
+        strongestSkill: profile.strongestSkill
       };
       sequelizeUtils.update(StudentProfile, values, req, res, next);
     } else {

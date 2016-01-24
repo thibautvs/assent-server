@@ -5,9 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.TEXT,
       field: 'name'
-    },
-    code: { type: DataTypes.STRING(2),
-      field: 'code'
     }
   }, {
     tableName: 'language',
