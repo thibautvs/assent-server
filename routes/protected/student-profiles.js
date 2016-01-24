@@ -17,7 +17,8 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
         {model: models.Experience, attributes: ['id']},
         {model: models.SocialMedia, attributes: ['id']},
         {model: models.Audio, attributes: ['id']},
-        {model: models.Drive, attributes: ['id']}
+        {model: models.Drive, attributes: ['id']},
+        {model: models.StrongestSkill, attributes: ['id']}
       ]
     };
     sequelizeUtils.findWhere(StudentProfile, options, res, next);
@@ -39,8 +40,7 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
         country_id: profile.country,
         videoUrl: profile.videoUrl,
         aspirations: profile.aspirations,
-        preparation: profile.preparation,
-        strongestSkill: profile.strongestSkill
+        preparation: profile.preparation
       };
       sequelizeUtils.update(StudentProfile, values, req, res, next);
     } else {

@@ -33,10 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     preparation: {
       type: DataTypes.TEXT,
       field: 'preparation'
-    },
-    strongestSkill: {
-      type: DataTypes.TEXT,
-      field: 'strongest_skill'
     }
   }, {
     tableName: 'student_profile',
@@ -56,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         StudentProfile.hasMany(models.SocialMedia);
         StudentProfile.hasMany(models.Audio);
         StudentProfile.hasMany(models.Drive);
+        StudentProfile.hasMany(models.StrongestSkill);
       }
     }
   });

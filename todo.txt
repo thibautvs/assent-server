@@ -13,6 +13,7 @@ Improvements
 - Create operations : camelCase instead of snake_case for foreign keys
 - When camelCase for foreign keys done, create util to do the mapping automatically (as same names on both ends)
 - logger (morgan, ...)
+- Validations of "required" type for position and id fields (student profile id, etc)
 
 After beta
 ----------
