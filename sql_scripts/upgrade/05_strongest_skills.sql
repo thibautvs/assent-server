@@ -16,7 +16,7 @@ CREATE TABLE strongest_skill
   updated_at         timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT strongest_skill_pkey                    PRIMARY KEY (id),
   CONSTRAINT strongest_skill_student_profile_id_fkey FOREIGN KEY (student_profile_id) REFERENCES student_profile (id),
-  CONSTRAINT strongest_skill_skill_unique            UNIQUE (skill),
+  CONSTRAINT strongest_skill_skill_unique            UNIQUE (student_profile_id, skill),
   CONSTRAINT strongest_skill_position_unique         UNIQUE (student_profile_id, position)
 );
 

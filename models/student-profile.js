@@ -29,10 +29,6 @@ module.exports = (sequelize, DataTypes) => {
     aspirations: {
       type: DataTypes.TEXT,
       field: 'aspirations'
-    },
-    preparation: {
-      type: DataTypes.TEXT,
-      field: 'preparation'
     }
   }, {
     tableName: 'student_profile',
@@ -53,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         StudentProfile.hasMany(models.Audio);
         StudentProfile.hasMany(models.Drive);
         StudentProfile.hasMany(models.StrongestSkill);
+        StudentProfile.hasMany(models.Preparation);
       }
     }
   });

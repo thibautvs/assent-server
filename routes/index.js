@@ -2,19 +2,20 @@
 
 const fs = require('fs');
 const path = require('path');
+const models = require('../models');
 const validator = require('../utils/validator');
 const sequelizeUtils = require('../utils/sequelize');
 const httpResponseUtils = require('../utils/http-response');
 const HttpStatus = require('http-status');
 
-exports.initialize = (app, models) => {
-  initializeRoutes(path.join(__dirname, 'public'), app, models);
+exports.initialize = (app) => {
+  initializeRoutes(path.join(__dirname, 'public'), app);
   initializeTokenCheck(app);
-  initializeRoutes(path.join(__dirname, 'protected'), app, models);
+  initializeRoutes(path.join(__dirname, 'protected'), app);
   initializeGlobalErrorHandler(app);
 };
 
-function initializeRoutes(routesPath, app, models) {
+function initializeRoutes(routesPath, app) {
   fs
     .readdirSync(routesPath)
     .filter(file => file.indexOf('.') !== 0 && file !== 'index.js')

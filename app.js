@@ -7,13 +7,12 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const routes = require('./routes');
-const models = require('./models');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-routes.initialize(app, models);
+routes.initialize(app);
 
 let options;
 if (app.settings.env === 'development') {

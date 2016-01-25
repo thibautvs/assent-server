@@ -18,7 +18,8 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
         {model: models.SocialMedia, attributes: ['id']},
         {model: models.Audio, attributes: ['id']},
         {model: models.Drive, attributes: ['id']},
-        {model: models.StrongestSkill, attributes: ['id']}
+        {model: models.StrongestSkill, attributes: ['id']},
+        {model: models.Preparation, attributes: ['id']}
       ]
     };
     sequelizeUtils.findWhere(StudentProfile, options, res, next);
@@ -39,8 +40,7 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
         expectedGraduationYear: profile.expectedGraduationYear,
         country_id: profile.country,
         videoUrl: profile.videoUrl,
-        aspirations: profile.aspirations,
-        preparation: profile.preparation
+        aspirations: profile.aspirations
       };
       sequelizeUtils.update(StudentProfile, values, req, res, next);
     } else {
