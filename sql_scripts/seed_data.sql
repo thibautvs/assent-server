@@ -34,9 +34,10 @@ INSERT INTO language (name, code) VALUES ('English', 'en');
 /*
  * invite_code
  */
-INSERT INTO invite_code (code) VALUES ('5cb92cda');
-INSERT INTO invite_code (code) VALUES ('52c2050e');
-INSERT INTO invite_code (code) VALUES ('e7765110');
+INSERT INTO invite_code (code) VALUES ('5cb92cda'); // Me
+INSERT INTO invite_code (code) VALUES ('52c2050e'); // Catherine
+INSERT INTO invite_code (code) VALUES ('e7765110'); // Garreth
+/* For Garreth users */
 INSERT INTO invite_code (code) VALUES ('88629b0b');
 INSERT INTO invite_code (code) VALUES ('16e60011');
 INSERT INTO invite_code (code) VALUES ('355befe9');
@@ -84,3 +85,4 @@ INSERT INTO invite_code (code) VALUES ('777cf4c1');
 INSERT INTO invite_code (code) VALUES ('56877a71');
 INSERT INTO invite_code (code) VALUES ('ca118bb6');
 INSERT INTO invite_code (code) VALUES ('032aa16c');
+/* end of Garreth users */
