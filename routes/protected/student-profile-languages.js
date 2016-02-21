@@ -15,7 +15,7 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
         student_profile_id: profileLanguage.studentProfile,
         language_id: profileLanguage.language,
         isMotherTongue: profileLanguage.isMotherTongue,
-        level: profileLanguage.level
+        level: profileLanguage.isMotherTongue ? null : profileLanguage.level
       };
       sequelizeUtils.create(StudentProfileLanguage, values, res, next);
     } else {
@@ -30,7 +30,7 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
       let values = {
         language_id: profileLanguage.language,
         isMotherTongue: profileLanguage.isMotherTongue,
-        level: profileLanguage.level
+        level: profileLanguage.isMotherTongue ? null : profileLanguage.level
       };
       sequelizeUtils.update(StudentProfileLanguage, values, req, res, next);
     } else {
@@ -43,6 +43,9 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
   });
 
   function validate(profileLanguage) {
+    if (profileLanguage.isMotherTongue) {
+      return true;
+    }
     return validator.isValid([
       validator.required(profileLanguage.level)
     ]);

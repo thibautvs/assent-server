@@ -9,8 +9,7 @@ const sequelizeUtils = require('../utils/sequelize');
 const httpResponseUtils = require('../utils/http-response');
 const HttpStatus = require('http-status');
 
-exports.initialize = (app) => {
-  winston.add(winston.transports.File, { filename: path.join(__dirname, '../..', 'logs.log') });
+exports.initialize = app => {
   initializeRoutes(path.join(__dirname, 'public'), app);
   initializeTokenCheck(app);
   initializeRoutes(path.join(__dirname, 'protected'), app);
@@ -35,6 +34,7 @@ function initializeTokenCheck(app) {
 }
 
 function initializeGlobalErrorHandler(app) {
+  winston.add(winston.transports.File, { filename: path.join(__dirname, '../..', 'logs.log') });
   app.use((err, req, res, next) => {
     winston.error(err.stack);
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ message: HttpStatus[HttpStatus.INTERNAL_SERVER_ERROR] });
