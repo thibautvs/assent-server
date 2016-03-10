@@ -46,6 +46,15 @@ exports.socialMedium = value => {
     || contains(value, 'instagram.com/'));
 };
 
+exports.startDateLowerThanEndDate = (startMonth, startYear, endMonth, endYear) => {
+  if (startMonth && startYear && endMonth && endYear) {
+    let startDate = new Date(startYear, startMonth - 1, 1);
+    let endDate = new Date(endYear, endMonth - 1, 1);
+    return startDate < endDate;
+  }
+  return true;
+};
+
 exports.isValid = validations => {
   return validations.every(v => v === true);
 };

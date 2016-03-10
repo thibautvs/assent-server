@@ -2,13 +2,21 @@
 
 module.exports = (sequelize, DataTypes) => {
   let Experience = sequelize.define('Experience', {
-    startDate: {
-      type: DataTypes.DATE,
-      field: 'start_date'
+    startMonth: {
+      type: DataTypes.INTEGER,
+      field: 'start_month'
     },
-    endDate: {
-      type: DataTypes.DATE,
-      field: 'end_date'
+    startYear: {
+      type: DataTypes.INTEGER,
+      field: 'start_year'
+    },
+    endMonth: {
+      type: DataTypes.INTEGER,
+      field: 'end_month'
+    },
+    endYear: {
+      type: DataTypes.INTEGER,
+      field: 'end_year'
     },
     description: {
       type: DataTypes.TEXT,
