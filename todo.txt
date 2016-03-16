@@ -14,6 +14,7 @@ Improvements
 - When camelCase for foreign keys done, create util to do the mapping automatically (as same names on both ends)
 - logger (morgan, ...)
 - Validations of "required" type for position and id fields (student profile id, etc)
+- When Sequelize releases a new version, try uncommenting out the lines in StudentProfiles.js route
 
 After beta
 ----------

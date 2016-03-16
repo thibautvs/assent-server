@@ -9,17 +9,19 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
     let options = {
       where: {id: req.params.id},
       include: [
-        {model: models.StudentProfileSkill, attributes: ['id']},
-        {model: models.StudentProfileLanguage, attributes: ['id']},
-        {model: models.Grade, attributes: ['id']},
-        {model: models.StudentProfileHobby, attributes: ['id']},
-        {model: models.Education, attributes: ['id']},
-        {model: models.Experience, attributes: ['id']},
-        {model: models.SocialMedia, attributes: ['id']},
-        {model: models.Audio, attributes: ['id']},
-        {model: models.Drive, attributes: ['id']},
-        {model: models.StrongestSkill, attributes: ['id']},
-        {model: models.Preparation, attributes: ['id']}
+        //TODO uncomment out attributes: ['id'] when Sequelize fixed the bug
+        // https://www.bountysource.com/issues/27537136-limit-fails-when-used-with-belongstomany-hasmany-association-even-with-separate-true
+        {model: models.StudentProfileSkill/*, attributes: ['id']*/, separate: true},
+        {model: models.StudentProfileLanguage/*, attributes: ['id']*/, separate: true},
+        {model: models.Grade/*, attributes: ['id']*/, separate: true},
+        {model: models.StudentProfileHobby/*, attributes: ['id']*/, separate: true},
+        {model: models.Education/*, attributes: ['id']*/, separate: true},
+        {model: models.Experience/*, attributes: ['id']*/, separate: true},
+        {model: models.SocialMedia/*, attributes: ['id']*/, separate: true},
+        {model: models.Audio/*, attributes: ['id']*/, separate: true},
+        {model: models.Drive/*, attributes: ['id']*/, separate: true},
+        {model: models.StrongestSkill/*, attributes: ['id']*/, separate: true},
+        {model: models.Preparation/*, attributes: ['id']*/, separate: true}
       ]
     };
     sequelizeUtils.findWhere(StudentProfile, options, res, next);
