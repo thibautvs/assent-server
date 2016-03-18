@@ -43,7 +43,10 @@ exports.socialMedium = value => {
     || contains(value, 'linkedin.com/in/')
     || contains(value, 'plus.google.com/')
     || contains(value, 'github.com/')
-    || contains(value, 'instagram.com/'));
+    || contains(value, 'instagram.com/')
+    || contains(value, 'medium.com/')
+    || contains(value, 'tumblr.com/')
+    || contains(value, 'slideshare.net/'));
 };
 
 exports.startDateLowerThanEndDate = (startMonth, startYear, endMonth, endYear) => {

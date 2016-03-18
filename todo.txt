@@ -14,7 +14,8 @@ Improvements
 - When camelCase for foreign keys done, create util to do the mapping automatically (as same names on both ends)
 - logger (morgan, ...)
 - Validations of "required" type for position and id fields (student profile id, etc)
-- When Sequelize releases a new version, try uncommenting out the lines in StudentProfiles.js route
+- When Sequelize releases a new version, try uncommenting out the lines in student-profiles.js route
+  (https://www.bountysource.com/issues/27537136-limit-fails-when-used-with-belongstomany-hasmany-association-even-with-separate-true)
 
 After beta
 ----------

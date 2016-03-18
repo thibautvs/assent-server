@@ -9,8 +9,6 @@ module.exports = (app, models, validator, sequelizeUtils, httpResponseUtils) => 
     let options = {
       where: {id: req.params.id},
       include: [
-        //TODO uncomment out attributes: ['id'] when Sequelize fixed the bug
-        // https://www.bountysource.com/issues/27537136-limit-fails-when-used-with-belongstomany-hasmany-association-even-with-separate-true
         {model: models.StudentProfileSkill/*, attributes: ['id']*/, separate: true},
         {model: models.StudentProfileLanguage/*, attributes: ['id']*/, separate: true},
         {model: models.Grade/*, attributes: ['id']*/, separate: true},
